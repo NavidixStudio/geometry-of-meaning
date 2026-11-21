@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="en" dir="ltr" data-default-lang="en">
 <head>
+<script>if(location.hostname==='navidixstudio.github.io'){location.replace('https://navidixstudio.com'+location.pathname.replace(/^\/Navidix/i,'')+location.search+location.hash);}</script>
+<script>(function(){try{var u=new URL(location.href),q=(u.searchParams.get('lang')||'').toLowerCase(),s=localStorage.getItem('nvx_gm_lang'),d=document.documentElement.getAttribute('data-default-lang')||'fa',l=(q==='en'||q==='fa')?q:((s==='en'||s==='fa')?s:d);document.documentElement.lang=l;document.documentElement.dir=(l==='en'?'ltr':'rtl');}catch(_){}})();</script>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>هندسه‌ی معنا | The Geometry of Meaning — هوش مصنوعی چطور بدون «فهمیدن» می‌فهمد؟ (آزمایشگاه سه‌بعدی) | نویدیکس</title>
+<title>The Geometry of Meaning | هندسه‌ی معنا — Interactive 3D Word Embeddings, Self-Attention &amp; Softmax Lab | Navidix</title>
 <meta name="description" content="آزمایشگاه سه‌بعدی تعاملی هندسه‌ی معنا در استودیو نویدیکس: چطور مدل‌های هوش مصنوعی مثل Claude، GPT و Gemini با بردارهای کلمه (Word Embeddings)، مکانیسم توجه (Self-Attention) و دمای سافت‌مکس (Temperature) زبان را می‌فهمند و چرا گاهی توهم (Hallucination) می‌زنند؟" />
 <meta name="keywords" content="هندسه معنا, هوش مصنوعی چطور کار میکند, بردار کلمه, Word Embedding, مکانیسم توجه, Self-Attention, معماری ترنسفورمر, شباهت کسینوسی, Cosine Similarity, پارامتر دما Temperature, توهم هوش مصنوعی Hallucination, Top-P, آزمایشگاه علمی تعاملی, استودیو نویدیکس, Claude Fable 5.2, GPT-6.2 Astra, Gemini 4 Neon" />
 <meta name="author" content="محمد نویدی" />
@@ -32,9 +34,9 @@
 <meta name="twitter:title" content="هندسه‌ی معنا — آزمایشگاه سه‌بعدی ذهن هوش مصنوعی | نویدیکس" />
 <meta name="twitter:description" content="واژه‌ها برای ماشین کلمه نیستند؛ مختصات در فضا هستند. روی کلمات کلیک کن، پرتوهای Attention را ببین و ریشه‌ی ریاضی توهم هوش مصنوعی را امتحان کن." />
 <meta name="twitter:image" content="https://navidixstudio.com/og-home.png" />
-<link rel="icon" href="/favicon.ico" sizes="any" />
-<link rel="icon" type="image/png" sizes="192x192" href="/navidix-icon-192.png" />
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<link rel="icon" href="https://navidixstudio.com/favicon.ico" sizes="any" />
+<link rel="icon" type="image/png" sizes="192x192" href="https://navidixstudio.com/navidix-icon-192.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="https://navidixstudio.com/apple-touch-icon.png" />
 <style>
 @font-face{font-family:'Navidix Serif';src:url('./assets/fonts/source-serif-4-latin.woff2')format('woff2');font-weight:200 900;font-style:normal;font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-200B,U+2010-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 @font-face{font-family:'Navidix Serif';src:url('./assets/fonts/source-serif-4-latin-italic.woff2')format('woff2');font-weight:200 900;font-style:italic;font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-200B,U+2010-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
@@ -148,14 +150,20 @@
 
 <header class="xbar"><div class="xbar__row">
   <a class="xbar__home" href="https://navidixstudio.com/"><img src="./assets/navidix-wordmark.webp" alt="NAVIDIX" width="104" height="16" /></a>
-  <a href="https://navidixstudio.com/explore/">پلتفرم علمی تعاملی ←</a>
+  <div class="xbar__actions">
+    <div class="gm-lang-switch" role="group" aria-label="Language switch">
+      <button type="button" class="gm-lang-btn" data-gm-lang="en" aria-pressed="false">EN</button>
+      <button type="button" class="gm-lang-btn" data-gm-lang="fa" aria-pressed="true">فا</button>
+    </div>
+    <a href="https://navidixstudio.com/explore/" data-i18n="nav.explore">پلتفرم علمی تعاملی ←</a>
+  </div>
 </div></header>
 
-<nav class="crumb" aria-label="مسیر صفحه">
+<nav class="crumb" aria-label="Breadcrumb">
   <ol>
-    <li><a href="https://navidixstudio.com/">نویدیکس</a></li>
-    <li><a href="https://navidixstudio.com/explore/">پلتفرم علمی تعاملی</a></li>
-    <li><span aria-current="page">هندسه‌ی معنا</span></li>
+    <li><a href="https://navidixstudio.com/" data-i18n="crumb.home">نویدیکس</a></li>
+    <li><a href="https://navidixstudio.com/explore/" data-i18n="crumb.explore">پلتفرم علمی تعاملی</a></li>
+    <li><span aria-current="page" data-i18n="crumb.cur">هندسه‌ی معنا</span></li>
   </ol>
 </nav>
 
@@ -165,81 +173,88 @@
   <div class="xhero__field" aria-hidden="true"></div>
   <div class="xwrap xhero__in">
     <div class="gm-hero-meta xin">
-      <span class="gm-badge">تجربه‌ی ۰۶ · نسخه‌ی پیشرفته سه‌بعدی</span>
-      <span class="gm-badge gm-badge--ion">موتور زنده WebGL · تمام‌صفحه · کلیک روی واژه‌ها</span>
+      <span class="gm-badge" data-i18n="hero.b1">تجربه‌ی ۰۶ · نسخه‌ی پیشرفته سه‌بعدی</span>
+      <span class="gm-badge gm-badge--ion" data-i18n="hero.b2">موتور زنده WebGL · تمام‌صفحه · کلیک روی واژه‌ها</span>
+      <div class="gm-lang-switch" role="group" aria-label="Language switch">
+        <button type="button" class="gm-lang-btn" data-gm-lang="en" aria-pressed="false">EN</button>
+        <button type="button" class="gm-lang-btn" data-gm-lang="fa" aria-pressed="true">فا</button>
+      </div>
     </div>
-    <h1 class="xin xin--2">هندسه‌ی معنا<span class="xhero__en">The Geometry of Meaning</span></h1>
-    <p class="xhero__lede xin xin--3">بعضی‌ها می‌گویند هوش مصنوعی «فقط از یک بانک عظیم جملات کپی می‌کند»؛ بعضی دیگر می‌گویند «مغزی است که معنی کلمات را مثل ما حس می‌کند». <b>هر دو تصویر غلط‌اند.</b> برای ماشین، واژه‌ها نه متن‌اند و نه احساس — <b>نقطه و زاویه در یک فضای هندسی‌اند.</b> اینجا وارد همان فضا می‌شوی، با کلمات جمع و تفریق می‌کنی، پرتوهای Attention را روی کلمه‌ی «شیر» می‌بینی و با دست خودت توهم هوش مصنوعی را تولید می‌کنی.</p>
+    <h1 class="xin xin--2" data-i18n-html="hero.h1">هندسه‌ی معنا<span class="xhero__en">The Geometry of Meaning</span></h1>
+    <p class="xhero__lede xin xin--3" data-i18n-html="hero.lede">بعضی‌ها می‌گویند هوش مصنوعی «فقط از یک بانک عظیم جملات کپی می‌کند»؛ بعضی دیگر می‌گویند «مغزی است که معنی کلمات را مثل ما حس می‌کند». <b>هر دو تصویر غلط‌اند.</b> برای ماشین، واژه‌ها نه متن‌اند و نه احساس — <b>نقطه و زاویه در یک فضای هندسی‌اند.</b> اینجا وارد همان فضا می‌شوی، با کلمات جمع و تفریق می‌کنی، پرتوهای Attention را روی کلمه‌ی «شیر» می‌بینی و با دست خودت توهم هوش مصنوعی را تولید می‌کنی.</p>
     <hr class="xrule xin xin--3" />
     <div class="gm-hero-actions xin xin--3">
       <a class="xbtn xbtn--go" href="#stage">
-        <span>ورود به آزمایشگاه سه‌بعدی</span>
+        <span data-i18n="hero.cta1">ورود به آزمایشگاه سه‌بعدی</span>
         <svg class="xbtn__ind" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h14M12 6l6 6-6 6"/></svg>
       </a>
       <a class="xbtn" href="#science">
-        <span>خواندن تحلیل علمی و فرمول‌ها</span>
+        <span data-i18n="hero.cta2">خواندن تحلیل علمی و فرمول‌ها</span>
       </a>
     </div>
   </div>
 </section>
 
-<section class="xwrap xp" id="stage" aria-label="آزمایشگاه سه‌بعدی هندسه‌ی معنا">
-  <p class="xp__q">اگر «پادشاه» را از «مرد» کم کنی و «زن» را به آن اضافه کنی، چرا یک ماشینِ بی‌احساس دقیقاً روی <b>«ملکه»</b> فرود می‌آید؟ و چرا کلمه‌ی <b>«شیر»</b> در جمله‌ی جنگل و جمله‌ی صبحانه به دو سیاره‌ی کاملاً متفاوت سفر می‌کند؟ <b>خودت آزمایش کن.</b></p>
+<section class="xwrap xp" id="stage" aria-label="The Geometry of Meaning 3D Laboratory">
+  <p class="xp__q" data-i18n-html="stage.q">اگر «پادشاه» را از «مرد» کم کنی و «زن» را به آن اضافه کنی، چرا یک ماشینِ بی‌احساس دقیقاً روی <b>«ملکه»</b> فرود می‌آید؟ و چرا کلمه‌ی <b>«شیر»</b> در جمله‌ی جنگل و جمله‌ی صبحانه به دو سیاره‌ی کاملاً متفاوت سفر می‌کند؟ <b>خودت آزمایش کن.</b></p>
 
   <div class="gmx-fs">
 
     <!-- 1. Guided 5-Chapter Story Rail + Free Lab -->
-    <nav class="gmx-chapters" aria-label="فصل‌های آزمایشگاه سه‌بعدی">
-      <button type="button" class="gmx-ch" data-gm-ch="space" aria-current="true"><i>۰۱</i><span>نقشه‌ی معنا</span></button>
-      <button type="button" class="gmx-ch" data-gm-ch="algebra" aria-current="false"><i>۰۲</i><span>جبرِ معنا</span></button>
-      <button type="button" class="gmx-ch" data-gm-ch="attention" aria-current="false"><i>۰۳</i><span>توجه و معمای «شیر»</span></button>
-      <button type="button" class="gmx-ch" data-gm-ch="temperature" aria-current="false"><i>۰۴</i><span>دما و ریشه‌ی توهم</span></button>
-      <button type="button" class="gmx-ch" data-gm-ch="limits" aria-current="false"><i>۰۵</i><span>سایه‌ی ۱۲٬۰۰۰ بُعد</span></button>
-      <button type="button" class="gmx-ch gmx-ch--free" data-gm-ch="free" aria-current="false"><i>◆</i><span>آزمایشگاه آزاد</span></button>
+    <nav class="gmx-chapters" aria-label="3D Laboratory Chapters">
+      <button type="button" class="gmx-ch" data-gm-ch="space" aria-current="true"><i data-i18n="ch.1.no">۰۱</i><span data-i18n="ch.1.t">نقشه‌ی معنا</span></button>
+      <button type="button" class="gmx-ch" data-gm-ch="algebra" aria-current="false"><i data-i18n="ch.2.no">۰۲</i><span data-i18n="ch.2.t">جبرِ معنا</span></button>
+      <button type="button" class="gmx-ch" data-gm-ch="attention" aria-current="false"><i data-i18n="ch.3.no">۰۳</i><span data-i18n="ch.3.t">توجه و معمای «شیر»</span></button>
+      <button type="button" class="gmx-ch" data-gm-ch="temperature" aria-current="false"><i data-i18n="ch.4.no">۰۴</i><span data-i18n="ch.4.t">دما و ریشه‌ی توهم</span></button>
+      <button type="button" class="gmx-ch" data-gm-ch="limits" aria-current="false"><i data-i18n="ch.5.no">۰۵</i><span data-i18n="ch.5.t">سایه‌ی ۱۲٬۰۰۰ بُعد</span></button>
+      <button type="button" class="gmx-ch gmx-ch--free" data-gm-ch="free" aria-current="false"><i>◆</i><span data-i18n="ch.free">آزمایشگاه آزاد</span></button>
     </nav>
 
     <!-- 2. Semantic Constellation Key -->
-    <ul class="gmx-legend" aria-label="راهنمای خوشه‌های معنایی">
-      <li><i class="gmx-legend__dot" style="--k:#F5B754"></i><span>سلطنت و انسان</span></li>
-      <li><i class="gmx-legend__dot" style="--k:#8FDBFF"></i><span>جغرافیا و پایتخت</span></li>
-      <li><i class="gmx-legend__dot" style="--k:#FF6A5A"></i><span>حیات‌وحش</span></li>
-      <li><i class="gmx-legend__dot" style="--k:#3EE0A8"></i><span>خوراک و صبحانه</span></li>
-      <li><i class="gmx-legend__dot" style="--k:#5294FF"></i><span>آب و ابزار</span></li>
-      <li><i class="gmx-legend__dot" style="--k:#A78BFA"></i><span>علم و هوش</span></li>
-      <li><i class="gmx-legend__diamond" style="--k:#E31B23"></i><span>کریستال «شیر» (پرسش زنده)</span></li>
+    <ul class="gmx-legend" aria-label="Semantic Clusters">
+      <li><i class="gmx-legend__dot" style="--k:#F5B754"></i><span data-i18n="leg.1">سلطنت و انسان</span></li>
+      <li><i class="gmx-legend__dot" style="--k:#8FDBFF"></i><span data-i18n="leg.2">جغرافیا و پایتخت</span></li>
+      <li><i class="gmx-legend__dot" style="--k:#FF6A5A"></i><span data-i18n="leg.3">حیات‌وحش</span></li>
+      <li><i class="gmx-legend__dot" style="--k:#3EE0A8"></i><span data-i18n="leg.4">خوراک و صبحانه</span></li>
+      <li><i class="gmx-legend__dot" style="--k:#5294FF"></i><span data-i18n="leg.5">آب و ابزار</span></li>
+      <li><i class="gmx-legend__dot" style="--k:#A78BFA"></i><span data-i18n="leg.6">علم و هوش</span></li>
+      <li><i class="gmx-legend__diamond" style="--k:#E31B23"></i><span data-i18n="leg.7">کریستال «شیر» (پرسش زنده)</span></li>
     </ul>
 
     <!-- 3. The 3D WebGL Spatial Observatory -->
     <div class="gmx-stage">
-      <canvas class="gmx-canvas" role="img" aria-label="شبیه‌ساز تعاملی سه‌بعدی فضای برداری واژگان فارسی، جبر معنایی، پرتوهای Attention و توزیع احتمال Softmax"></canvas>
+      <canvas class="gmx-canvas" role="img" aria-label="Interactive 3D simulator of word embedding vectors, semantic algebra, Self-Attention beams, and Softmax Temperature"></canvas>
 
       <!-- Floating Top Telemetry + Quick Action Buttons -->
       <div class="gmx-hud-top">
         <div class="gmx-telemetry" data-gm-telemetry aria-live="polite"></div>
         <div class="gmx-stage-tools">
-          <button type="button" class="gmx-icon-btn gmx-icon-btn--toggle-dock" data-gm-dock aria-pressed="false" title="مخفی یا نمایش پنل کنترل در تمام‌صفحه">
+          <button type="button" class="gmx-icon-btn gmx-icon-btn--lang" data-gm-lang-toggle title="Switch language (EN / FA)">
+            <span>EN</span>
+          </button>
+          <button type="button" class="gmx-icon-btn gmx-icon-btn--toggle-dock" data-gm-dock aria-pressed="false" title="Toggle control panel in fullscreen">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 14h18"/></svg>
             <span>مخفی‌کردن پنل</span>
           </button>
-          <button type="button" class="gmx-icon-btn" data-gm-orbit aria-pressed="true" title="چرخش خودکار دوربین">
+          <button type="button" class="gmx-icon-btn" data-gm-orbit aria-pressed="true" title="Toggle auto orbit">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v6h-6"/></svg>
-            <span>چرخش</span>
+            <span data-i18n="tool.orbit">چرخش</span>
           </button>
-          <button type="button" class="gmx-icon-btn gmx-icon-btn--fs" data-gm-fs aria-pressed="false" title="حالت تمام‌صفحه (کلید F)">
+          <button type="button" class="gmx-icon-btn gmx-icon-btn--fs" data-gm-fs aria-pressed="false" title="Fullscreen (F)">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4H4v5M15 4h5v5M9 20H4v-5M15 20h5v-5"/></svg>
             <span>تمام‌صفحه</span>
           </button>
         </div>
       </div>
 
-      <!-- Projected Crisp Persian 3D Labels -->
+      <!-- Projected Crisp 3D Labels -->
       <div class="gmx-labels" aria-hidden="true"></div>
 
       <!-- Interactive Click-to-Inspect 8D Vector Card -->
-      <aside class="gmx-inspector" data-gm-inspector hidden aria-label="بازرس بردار ۸بعدی واژه"></aside>
+      <aside class="gmx-inspector" data-gm-inspector hidden aria-label="8D Word Vector Inspector"></aside>
 
       <!-- Gesture / Shortcut Hint -->
-      <p class="gmx-hint">بکش تا بچرخانی · روی هر واژه کلیک کن تا بردارش باز شود · اسکرول برای زوم · کلید F تمام‌صفحه</p>
+      <p class="gmx-hint" data-i18n="stage.hint">بکش تا بچرخانی · روی هر واژه کلیک کن تا بردارش باز شود · اسکرول برای زوم · کلید F تمام‌صفحه</p>
 
       <!-- Loading / WebGL Fallback Overlay -->
       <div class="xstage__note"><b>در حال آماده‌سازی فضای سه‌بعدی معنا…</b></div>
@@ -251,14 +266,14 @@
       <!-- Free Lab Sub-Mode Switcher -->
       <div class="gmx-mode-panel" data-gm-panel="freetabs" hidden>
         <div class="gmx-panel-head" style="margin-bottom:8px">
-          <p class="gmx-panel-title">انتخاب ابزار آزمایشگاه آزاد <span class="gmx-panel-tag">FREE LAB</span></p>
+          <p class="gmx-panel-title" data-i18n-html="ft.title">انتخاب ابزار آزمایشگاه آزاد <span class="gmx-panel-tag">FREE LAB</span></p>
         </div>
         <div class="gmx-pills" style="margin-bottom:0">
-          <button type="button" class="gmx-pill" data-gm-freesub="space" aria-pressed="false">کهکشان ۳۶ واژه (کلیک و بازرسی)</button>
-          <button type="button" class="gmx-pill" data-gm-freesub="algebra" aria-pressed="false">جبر برداری کلمات</button>
-          <button type="button" class="gmx-pill" data-gm-freesub="attention" aria-pressed="true">موتور Attention «شیر»</button>
-          <button type="button" class="gmx-pill" data-gm-freesub="temperature" aria-pressed="false">آزمایشگاه دما و توهم</button>
-          <button type="button" class="gmx-pill" data-gm-freesub="limits" aria-pressed="false">برش چرخشی ۸ بُعد ← ۳ بُعد</button>
+          <button type="button" class="gmx-pill" data-gm-freesub="space" aria-pressed="false" data-i18n="ft.1">کهکشان ۳۶ واژه (کلیک و بازرسی)</button>
+          <button type="button" class="gmx-pill" data-gm-freesub="algebra" aria-pressed="false" data-i18n="ft.2">جبر برداری کلمات</button>
+          <button type="button" class="gmx-pill" data-gm-freesub="attention" aria-pressed="true" data-i18n="ft.3">موتور Attention «شیر»</button>
+          <button type="button" class="gmx-pill" data-gm-freesub="temperature" aria-pressed="false" data-i18n="ft.4">آزمایشگاه دما و توهم</button>
+          <button type="button" class="gmx-pill" data-gm-freesub="limits" aria-pressed="false" data-i18n="ft.5">برش چرخشی ۸ بُعد ← ۳ بُعد</button>
         </div>
       </div>
 
@@ -268,13 +283,13 @@
       <!-- MODE 02: Vector Algebra Playground -->
       <div class="gmx-mode-panel" data-gm-panel="algebra" hidden>
         <div class="gmx-panel-head">
-          <p class="gmx-panel-title">معادله‌ی برداری را انتخاب کن <span class="gmx-panel-tag">A + (C − B)</span></p>
+          <p class="gmx-panel-title" data-i18n-html="al.title">معادله‌ی برداری را انتخاب کن <span class="gmx-panel-tag">A + (C − B)</span></p>
         </div>
         <div class="gmx-pills">
-          <button type="button" class="gmx-pill" data-gm-analogy="king" aria-pressed="true">پادشاه − مرد + زن</button>
-          <button type="button" class="gmx-pill" data-gm-analogy="paris" aria-pressed="false">تهران − ایران + فرانسه</button>
-          <button type="button" class="gmx-pill" data-gm-analogy="tokyo" aria-pressed="false">تهران − ایران + ژاپن</button>
-          <button type="button" class="gmx-pill" data-gm-analogy="prince" aria-pressed="false">شاهزاده − مرد + زن</button>
+          <button type="button" class="gmx-pill" data-gm-analogy="king" aria-pressed="true" data-i18n="al.1">پادشاه − مرد + زن</button>
+          <button type="button" class="gmx-pill" data-gm-analogy="paris" aria-pressed="false" data-i18n="al.2">تهران − ایران + فرانسه</button>
+          <button type="button" class="gmx-pill" data-gm-analogy="tokyo" aria-pressed="false" data-i18n="al.3">تهران − ایران + ژاپن</button>
+          <button type="button" class="gmx-pill" data-gm-analogy="prince" aria-pressed="false" data-i18n="al.4">شاهزاده − مرد + زن</button>
         </div>
         <div class="gmx-eq-box">
           <div class="gmx-eq-formula" data-gm-eq-formula></div>
@@ -283,7 +298,7 @@
         <div class="gmx-sliders">
           <div class="gmx-slider-card">
             <div class="gmx-slider-top">
-              <label class="gmx-slider-label" for="gm-sl-analogy">انتقال موازی بردار تفاوت روی مبدأ</label>
+              <label class="gmx-slider-label" for="gm-sl-analogy" data-i18n="al.sl">انتقال موازی بردار تفاوت روی مبدأ</label>
               <span class="gmx-slider-val" data-gm-val="analogy">۱۰۰٪</span>
             </div>
             <input id="gm-sl-analogy" type="range" min="0" max="1" step="0.01" value="1" data-gm-sl="analogy" />
@@ -294,18 +309,18 @@
       <!-- MODE 03: Polysemy & Real Self-Attention -->
       <div class="gmx-mode-panel" data-gm-panel="attention" hidden>
         <div class="gmx-panel-head">
-          <p class="gmx-panel-title">بافت جمله را عوض کن و سفر «شیر» را ببین <span class="gmx-panel-tag">Self-Attention</span></p>
+          <p class="gmx-panel-title" data-i18n-html="at.title">بافت جمله را عوض کن و سفر «شیر» را ببین <span class="gmx-panel-tag">Self-Attention</span></p>
         </div>
         <div class="gmx-pills">
-          <button type="button" class="gmx-pill" data-gm-sent="wildlife" aria-pressed="true">در سکوت <mark>جنگل</mark>، <span class="gmx-probe-hl">شیر</span> ناگهان <mark>غرش</mark> کرد و به سمت <mark>آهو</mark> پرید.</button>
-          <button type="button" class="gmx-pill" data-gm-sent="food" aria-pressed="false">برای <mark>صبحانه</mark> یک <mark>فنجان</mark> <span class="gmx-probe-hl">شیر</span> <mark>داغ</mark> با <mark>عسل</mark> و <mark>نان</mark> نوشیدم.</button>
-          <button type="button" class="gmx-pill" data-gm-sent="water" aria-pressed="false">با <mark>آچار</mark> پیچ <span class="gmx-probe-hl">شیر</span> را سفت کرد تا <mark>چکه</mark> و <mark>قطره</mark> از <mark>لوله</mark> قطع شود.</button>
-          <button type="button" class="gmx-pill" data-gm-sent="none" aria-pressed="false">فقط واژه‌ی تنها: <span class="gmx-probe-hl">شیر</span> (بدون بافت — لایه ۰)</button>
+          <button type="button" class="gmx-pill" data-gm-sent="wildlife" aria-pressed="true" data-i18n-html="at.s1">در سکوت <mark>جنگل</mark>، <span class="gmx-probe-hl">شیر</span> ناگهان <mark>غرش</mark> کرد و به سمت <mark>آهو</mark> پرید.</button>
+          <button type="button" class="gmx-pill" data-gm-sent="food" aria-pressed="false" data-i18n-html="at.s2">برای <mark>صبحانه</mark> یک <mark>فنجان</mark> <span class="gmx-probe-hl">شیر</span> <mark>داغ</mark> با <mark>عسل</mark> و <mark>نان</mark> نوشیدم.</button>
+          <button type="button" class="gmx-pill" data-gm-sent="water" aria-pressed="false" data-i18n-html="at.s3">با <mark>آچار</mark> پیچ <span class="gmx-probe-hl">شیر</span> را سفت کرد تا <mark>چکه</mark> و <mark>قطره</mark> از <mark>لوله</mark> قطع شود.</button>
+          <button type="button" class="gmx-pill" data-gm-sent="none" aria-pressed="false" data-i18n-html="at.s4">فقط واژه‌ی تنها: <span class="gmx-probe-hl">شیر</span> (بدون بافت — لایه ۰)</button>
         </div>
         <div class="gmx-sliders">
           <div class="gmx-slider-card">
             <div class="gmx-slider-top">
-              <label class="gmx-slider-label" for="gm-sl-layer">عمق عبور از لایه‌های ترنسفورمر</label>
+              <label class="gmx-slider-label" for="gm-sl-layer" data-i18n="at.sl">عمق عبور از لایه‌های ترنسفورمر</label>
               <span class="gmx-slider-val" data-gm-val="layer">لایه ۹ از ۱۲</span>
             </div>
             <input id="gm-sl-layer" type="range" min="0" max="12" step="0.2" value="9" data-gm-sl="layer" />
@@ -313,15 +328,15 @@
         </div>
         <div class="gmx-affinities">
           <div class="gmx-aff">
-            <div class="gmx-aff__top"><span class="gmx-aff__name">شباهت به «ببر» (حیوان)</span><span class="gmx-aff__val" style="--c:#FF6A5A" data-gm-aff-val="wildlife">۰٪</span></div>
+            <div class="gmx-aff__top"><span class="gmx-aff__name" data-i18n="at.a1">شباهت به «ببر» (حیوان)</span><span class="gmx-aff__val" style="--c:#FF6A5A" data-gm-aff-val="wildlife">۰٪</span></div>
             <div class="gmx-aff__track"><div class="gmx-aff__bar" style="--c:#FF6A5A" data-gm-aff-bar="wildlife"></div></div>
           </div>
           <div class="gmx-aff">
-            <div class="gmx-aff__top"><span class="gmx-aff__name">شباهت به «قهوه» (نوشیدنی)</span><span class="gmx-aff__val" style="--c:#3EE0A8" data-gm-aff-val="food">۰٪</span></div>
+            <div class="gmx-aff__top"><span class="gmx-aff__name" data-i18n="at.a2">شباهت به «قهوه» (نوشیدنی)</span><span class="gmx-aff__val" style="--c:#3EE0A8" data-gm-aff-val="food">۰٪</span></div>
             <div class="gmx-aff__track"><div class="gmx-aff__bar" style="--c:#3EE0A8" data-gm-aff-bar="food"></div></div>
           </div>
           <div class="gmx-aff">
-            <div class="gmx-aff__top"><span class="gmx-aff__name">شباهت به «لوله» (لوله‌کشی)</span><span class="gmx-aff__val" style="--c:#5294FF" data-gm-aff-val="water">۰٪</span></div>
+            <div class="gmx-aff__top"><span class="gmx-aff__name" data-i18n="at.a3">شباهت به «لوله» (لوله‌کشی)</span><span class="gmx-aff__val" style="--c:#5294FF" data-gm-aff-val="water">۰٪</span></div>
             <div class="gmx-aff__track"><div class="gmx-aff__bar" style="--c:#5294FF" data-gm-aff-bar="water"></div></div>
           </div>
         </div>
@@ -330,23 +345,23 @@
       <!-- MODE 04: Softmax Temperature, Top-P & Live Token Sampler -->
       <div class="gmx-mode-panel" data-gm-panel="temperature" hidden>
         <div class="gmx-panel-head">
-          <p class="gmx-panel-title">آزمایشگاه دما، برش هسته و تولید کلمه‌ی بعدی <span class="gmx-panel-tag">Softmax(z / T)</span></p>
+          <p class="gmx-panel-title" data-i18n-html="tp.title">آزمایشگاه دما، برش هسته و تولید کلمه‌ی بعدی <span class="gmx-panel-tag">Softmax(z / T)</span></p>
         </div>
         <div class="gmx-pills">
-          <button type="button" class="gmx-pill" data-gm-prompt="factual" aria-pressed="true">جمله‌ی دانشی: «پایتخت کشور فرانسه شهرِ …»</button>
-          <button type="button" class="gmx-pill" data-gm-prompt="creative" aria-pressed="false">جمله‌ی ادبی: «در سکوت شب، ستاره‌ها در آسمانِ …»</button>
+          <button type="button" class="gmx-pill" data-gm-prompt="factual" aria-pressed="true" data-i18n="tp.p1">جمله‌ی دانشی: «پایتخت کشور فرانسه شهرِ …»</button>
+          <button type="button" class="gmx-pill" data-gm-prompt="creative" aria-pressed="false" data-i18n="tp.p2">جمله‌ی ادبی: «در سکوت شب، ستاره‌ها در آسمانِ …»</button>
         </div>
         <div class="gmx-sliders" style="margin-bottom:13px">
           <div class="gmx-slider-card">
             <div class="gmx-slider-top">
-              <label class="gmx-slider-label" for="gm-sl-temp">دما (Temperature) — از قطعی تا آشفته</label>
+              <label class="gmx-slider-label" for="gm-sl-temp" data-i18n="tp.slt">دما (Temperature) — از قطعی تا آشفته</label>
               <span class="gmx-slider-val" data-gm-val="temp">T = ۰٫۸۵</span>
             </div>
             <input id="gm-sl-temp" type="range" min="0.05" max="2.20" step="0.05" value="0.85" data-gm-sl="temp" />
           </div>
           <div class="gmx-slider-card">
             <div class="gmx-slider-top">
-              <label class="gmx-slider-label" for="gm-sl-topp">برش هسته (Top-P) — حذف دُمِ کم‌احتمال</label>
+              <label class="gmx-slider-label" for="gm-sl-topp" data-i18n="tp.slp">برش هسته (Top-P) — حذف دُمِ کم‌احتمال</label>
               <span class="gmx-slider-val" data-gm-val="topp">Top-P = ۹۲٪</span>
             </div>
             <input id="gm-sl-topp" type="range" min="0.30" max="1.00" step="0.02" value="0.92" data-gm-sl="topp" />
@@ -357,14 +372,14 @@
           <div class="gmx-sampler-box">
             <p class="gmx-prompt-preview" data-gm-prompt-preview></p>
             <button type="button" class="xbtn xbtn--go" data-gm-sample-btn style="justify-content:center">
-              <span>تولید کلمه‌ی بعدی (نمونه‌گیری زنده)</span>
+              <span data-i18n="tp.btn">تولید کلمه‌ی بعدی (نمونه‌گیری زنده)</span>
             </button>
             <div class="gmx-entropy-row">
-              <div class="gmx-metric-mini"><span>آنتروپی شانون (عدم‌قطعیت)</span><b data-gm-entropy>۰٫۰۰ بیت</b></div>
-              <div class="gmx-metric-mini"><span>احتمال توهم / خطا</span><b data-gm-risk>۰٪</b></div>
+              <div class="gmx-metric-mini"><span data-i18n="tp.ent">آنتروپی شانون (عدم‌قطعیت)</span><b data-gm-entropy>۰٫۰۰ بیت</b></div>
+              <div class="gmx-metric-mini"><span data-i18n="tp.rsk">احتمال توهم / خطا</span><b data-gm-risk>۰٪</b></div>
             </div>
             <div>
-              <p class="gmx-insp__sec-title" style="margin-bottom:5px">آخرین نمونه‌گیری‌ها:</p>
+              <p class="gmx-insp__sec-title" style="margin-bottom:5px" data-i18n="tp.hist">آخرین نمونه‌گیری‌ها:</p>
               <div class="gmx-sample-history" data-gm-sample-hist></div>
             </div>
           </div>
@@ -374,12 +389,12 @@
       <!-- MODE 05: 8D -> 3D Orthonormal Givens Slice Rotation -->
       <div class="gmx-mode-panel" data-gm-panel="limits" hidden>
         <div class="gmx-panel-head">
-          <p class="gmx-panel-title">چرخش واقعی برش ۸ بُعد روی صفحه‌ی ۳ بُعدی <span class="gmx-panel-tag">SO(8) Projection</span></p>
+          <p class="gmx-panel-title" data-i18n-html="lm.title">چرخش واقعی برش ۸ بُعد روی صفحه‌ی ۳ بُعدی <span class="gmx-panel-tag">SO(8) Projection</span></p>
         </div>
         <div class="gmx-sliders">
           <div class="gmx-slider-card">
             <div class="gmx-slider-top">
-              <label class="gmx-slider-label" for="gm-sl-slice">زاویه‌ی برش ابعاد پنهان (فاصله‌ی خط‌چین بین «پادشاه» و «لوله» را ببین)</label>
+              <label class="gmx-slider-label" for="gm-sl-slice" data-i18n="lm.sl">زاویه‌ی برش ابعاد پنهان (فاصله‌ی خط‌چین بین «پادشاه» و «لوله» را ببین)</label>
               <span class="gmx-slider-val" data-gm-val="slice">۰°</span>
             </div>
             <input id="gm-sl-slice" type="range" min="0" max="90" step="1" value="0" data-gm-sl="slice" />
@@ -396,7 +411,7 @@
           </button>
           <button type="button" class="xbtn xbtn--icon" data-gm-reset>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.6-5.9"/><path d="M20 4.2V9h-4.8"/></svg>
-            <span>بازنشانی</span>
+            <span data-i18n="bar.reset">بازنشانی</span>
           </button>
         </div>
         <button type="button" class="xbtn xbtn--icon" data-gm-fs aria-pressed="false">
@@ -410,10 +425,8 @@
   </div><!-- /.gmx-fs -->
 </section>
 
-<!-- =====================================================================
-     AUTHORITATIVE SCIENTIFIC PROSE & SEO KNOWLEDGE BASE
-     ===================================================================== -->
-<section class="xwrap xdoc" id="science" aria-label="تحلیل علمی و ریاضی هندسه‌ی معنا در هوش مصنوعی">
+<div id="science">
+<section class="xwrap xdoc" data-lang-block="fa" aria-label="تحلیل علمی و ریاضی هندسه‌ی معنا در هوش مصنوعی">
 
   <header class="xdoc__head">
     <p class="xdoc__eyebrow">SCIENTIFIC DEEP DIVE · کالبدشکافی ریاضی ذهن مدل‌های زبانی</p>
@@ -638,17 +651,148 @@
   </div>
 </section>
 
-<nav class="xwrap" aria-label="تجربه‌های دیگر">
+<!-- ENGLISH SCIENTIFIC DEEP DIVE (shown when lang="en") -->
+<section class="xwrap xdoc" data-lang-block="en" aria-label="Scientific Deep Dive — The Geometry of Meaning">
+
+  <header class="xdoc__head">
+    <p class="xdoc__eyebrow">SCIENTIFIC DEEP DIVE · INSIDE LARGE LANGUAGE MODEL GEOMETRY</p>
+    <h2 class="xdoc__title">How Machines Represent Meaning Without “Feeling” It</h2>
+    <p class="xdoc__sub">A mathematical walkthrough of word embeddings, cosine similarity, linear concept algebra, Transformer Self-Attention, and why Softmax Temperature creates hallucinations.</p>
+
+    <div class="xdoc__kpis" aria-label="Key LLM Semantic Geometry Metrics">
+      <div class="xdoc__kpi">
+        <small>Frontier Embedding Dimension (2026)</small>
+        <b>4K – 12K D</b>
+        <span>Every token lives as a vector on a high-D sphere</span>
+      </div>
+      <div class="xdoc__kpi">
+        <small>Semantic Similarity Metric</small>
+        <b>cos(θ)</b>
+        <span>Small angle = related · 90° = completely orthogonal</span>
+      </div>
+      <div class="xdoc__kpi">
+        <small>Context Disambiguation Engine</small>
+        <b>Self-Attention</b>
+        <span>Updates token coordinates across residual layers</span>
+      </div>
+      <div class="xdoc__kpi">
+        <small>Creativity vs. Hallucination</small>
+        <b>Temp · Top-P</b>
+        <span>Shapes Softmax sharpness &amp; clips low-prob tails</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="xdoc__layout">
+
+    <aside class="xdoc__aside" aria-label="Scientific Guide Contents">
+      <div class="xdoc__aside-head">Contents <span>TOC</span></div>
+      <ul class="xdoc__toc" data-xdoc-toc>
+        <li><a href="#gm-en-1" class="is-active"><i>01</i><span>Word Embeddings &amp; Cosine</span></a></li>
+        <li><a href="#gm-en-2"><i>02</i><span>Linear Concept Algebra</span></a></li>
+        <li><a href="#gm-en-3"><i>03</i><span>Self-Attention &amp; “Shīr”</span></a></li>
+        <li><a href="#gm-en-4"><i>04</i><span>Temperature, Top-P &amp; Hallucination</span></a></li>
+        <li><a href="#gm-en-5"><i>05</i><span>Real Math vs. Simplifications</span></a></li>
+        <li><a href="#gm-en-ref"><i>06</i><span>References</span></a></li>
+      </ul>
+      <a class="xdoc__back" href="#stage">↑ Back to 3D Meaning Lab</a>
+    </aside>
+
+    <div class="xdoc__body">
+
+      <article class="xdoc__sec" id="gm-en-1">
+        <span class="xdoc__sec-kicker">CHAPTER 01 · WORD EMBEDDINGS</span>
+        <h2>Why Meaning Becomes Angles on a Hypersphere</h2>
+        <p>GPUs do not read letters or experience emotion — they multiply floating-point matrices. Every token enters a model as an <strong>Embedding Vector</strong>. Across trillions of tokens of next-word prediction, models discover that organizing related concepts along shared geometric directions is the optimal compression of language.</p>
+        <div class="xdoc__formula">
+          <span class="xdoc__formula-eq">cos(θ) = (u · v) / (‖u‖ · ‖v‖)</span>
+          <small>Cosine similarity measures the angle between two meaning vectors: near 1 (0°) means closely related; 0 (90°) means orthogonal and unrelated.</small>
+        </div>
+      </article>
+
+      <article class="xdoc__sec" id="gm-en-2">
+        <span class="xdoc__sec-kicker">CHAPTER 02 · LINEAR REPRESENTATION</span>
+        <h2>Concept Arithmetic: King − Man + Woman ≈ Queen</h2>
+        <p>Semantic relationships emerge as <strong>parallel linear directions</strong>. The vector pointing from <strong>Man → Woman</strong> aligns parallel to <strong>King → Queen</strong> and <strong>Prince → Princess</strong>; the direction from <strong>Iran → Tehran</strong> aligns with <strong>France → Paris</strong> and <strong>Japan → Tokyo</strong>. Modern mechanistic interpretability research shows even higher-level features — truthfulness, syntax, coding bugs — map to linear subspaces.</p>
+      </article>
+
+      <article class="xdoc__sec" id="gm-en-3">
+        <span class="xdoc__sec-kicker">CHAPTER 03 · SELF-ATTENTION</span>
+        <h2>One Word, Three Worlds: The Persian “Shīr” (شیر) Disambiguation</h2>
+        <p>In Persian, the single word <strong>“Shīr” (شیر)</strong> means <strong>Lion</strong>, <strong>Milk</strong>, AND <strong>Faucet</strong>. Static embeddings trap it ambiguously in the middle. Transformer <strong>Self-Attention</strong> lets every token attend to surrounding context tokens and steer its residual-stream vector straight into the right semantic neighborhood:</p>
+        <div class="xdoc__formula">
+          <span class="xdoc__formula-eq">Attention(Q, K, V) = softmax( (Q · Kᵀ) / √dₖ ) · V</span>
+          <small>Query (<code>Q</code>) dot-products against context Keys (<code>K</code>), normalizes weights via <code>Softmax</code>, and blends Values (<code>V</code>) into the residual stream across layers 0 → 12.</small>
+        </div>
+      </article>
+
+      <article class="xdoc__sec" id="gm-en-4">
+        <span class="xdoc__sec-kicker">CHAPTER 04 · SOFTMAX, TEMPERATURE &amp; HALLUCINATION</span>
+        <h2>Why LLMs Confidently Hallucinate</h2>
+        <p>At the final layer, an LLM outputs raw logits across its vocabulary and converts them into next-token probabilities via Temperature-scaled Softmax:</p>
+        <div class="xdoc__formula">
+          <span class="xdoc__formula-eq">Pᵢ(T) = exp(zᵢ / T) / Σⱼ exp(zⱼ / T)</span>
+          <small>Low <code>T</code> concentrates probability on the single top peak; high <code>T</code> flattens the curve and raises red tail tokens. <code>Top-P</code> (Nucleus Sampling) trims the tail to curb hallucination.</small>
+        </div>
+      </article>
+
+      <article class="xdoc__sec" id="gm-en-5">
+        <span class="xdoc__sec-kicker">CHAPTER 05 · SCIENTIFIC HONESTY</span>
+        <h2>What Runs Live in Browser Math vs. Visual Simplification</h2>
+        <div class="xdoc__grid2">
+          <div class="xdoc__card xdoc__card--ok">
+            <span class="xdoc__card-tag">100% Real Browser Math</span>
+            <h3>Exact Linear Algebra &amp; Info Theory</h3>
+            <p>Cosine similarity <code>cos(θ)</code>, 8D parallelogram vector arithmetic, scaled dot-product attention weights, Temperature Softmax, Top-P nucleus cutoff, Shannon entropy (<code>H = −Σ P log₂ P</code>), perplexity (<code>2ᴴ</code>), and exact orthonormal <code>SO(8)</code> slice rotation run live in real time.</p>
+          </div>
+          <div class="xdoc__card">
+            <span class="xdoc__card-tag">Pedagogical Abstraction</span>
+            <h3>Curated 8D Space</h3>
+            <p>The 36 concepts use a clean handcrafted 8D space rather than raw 12,288-D weights from a multi-hundred-billion-parameter checkpoint, and omit multi-head MLP nonlinearity and superposition so each geometric mechanism stays visually crystal-clear.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="xdoc__sec" id="gm-en-ref">
+        <span class="xdoc__sec-kicker">CHAPTER 06 · REFERENCES</span>
+        <h2>Foundational Research Papers</h2>
+        <ul class="xdoc__refs">
+          <li><i>[1]</i><span>Mikolov et al. — <em>Efficient Estimation of Word Representations in Vector Space</em> (Word2Vec), 2013.</span></li>
+          <li><i>[2]</i><span>Vaswani et al. — <em>Attention Is All You Need</em>, NeurIPS 2017.</span></li>
+          <li><i>[3]</i><span>Ethayarajh, K. — <em>How Contextual are Contextualized Word Representations?</em>, EMNLP 2019.</span></li>
+          <li><i>[4]</i><span>Holtzman et al. — <em>The Curious Case of Neural Text Degeneration</em> (Nucleus / Top-P), ICLR 2020.</span></li>
+          <li><i>[5]</i><span>Elhage, Olah et al. (Anthropic) — <em>Toy Models of Superposition</em>, 2022.</span></li>
+          <li><i>[6]</i><span>Park, Choe, Veitch — <em>The Linear Representation Hypothesis and the Geometry of LLMs</em>, ICML 2024.</span></li>
+        </ul>
+      </article>
+
+      <div class="xdoc__bridge">
+        <div class="xdoc__bridge-copy">
+          <h3>Open-Source Lab #06 — Built Solo by Mohammad Navidi (Navidix Studio)</h3>
+          <p>This standalone vanilla Three.js lab is part of <strong>Navidix Studio</strong> — a solo-built multimodal AI operating system unifying <strong>470+ frontier models</strong> (Claude Fable 5.2, GPT-6.2 Astra, Gemini 4 Neon, DeepSeek V4.1) across 9 workbenches and 7 interactive 3D science labs.</p>
+        </div>
+        <a class="xbtn xbtn--go" href="https://github.com/NavidixStudio/geometry-of-meaning" target="_blank" rel="noopener">
+          <span>View Source on GitHub (MIT)</span>
+          <svg class="xbtn__ind" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h14M12 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+</div>
+
+<nav class="xwrap" aria-label="More Interactive Labs">
   <div class="xnext">
-    <a href="https://navidixstudio.com/explore/inside-a-cpu/"><small>تجربه‌ی ۰۷ · بعدی</small><b>درون یک پردازنده‌ی ۳ نانومتری — کالبدشکافی اولترا ۹ و فیزیک گرما</b></a>
-    <a href="https://navidixstudio.com/explore/hidden-network/"><small>تجربه‌ی ۰۵</small><b>شبکه‌ی پنهان — چرا اینترنت مقاوم و شکننده است</b></a>
+    <a href="https://navidixstudio.com/explore/inside-a-cpu/?lang=en"><small data-i18n="next.1.k">تجربه‌ی ۰۷ · بعدی</small><b data-i18n="next.1.t">درون یک پردازنده‌ی ۳ نانومتری — کالبدشکافی اولترا ۹ و فیزیک گرما</b></a>
+    <a href="https://navidixstudio.com/explore/hidden-network/"><small data-i18n="next.2.k">تجربه‌ی ۰۵</small><b data-i18n="next.2.t">شبکه‌ی پنهان — چرا اینترنت مقاوم و شکننده است</b></a>
   </div>
 </nav>
 
 </main>
 
 <footer class="xfoot">
-  <p><span aria-hidden="true">©</span> ۱۴۰۵ <b>استودیو نویدیکس</b> — ساخته‌ی <a href="https://navidixstudio.com/about.html"><b>محمد نویدی</b></a>. تمام حقوق محفوظ است.<br />بازنشر با ذکر منبع آزاد است، فروشش نه.</p>
+  <p data-i18n-html="foot.copy"><span aria-hidden="true">©</span> ۱۴۰۵ <b>استودیو نویدیکس</b> — ساخته‌ی <a href="https://navidixstudio.com/about.html"><b>محمد نویدی</b></a>. تمام حقوق محفوظ است.<br />بازنشر با ذکر منبع آزاد است، فروشش نه.</p>
 </footer>
 
 <script src="./sim/geometry-of-meaning.js"></script>
@@ -656,21 +800,24 @@
 (function () {
   function init() {
     if (window.NVXGeometryLab) window.NVXGeometryLab.mount('#stage');
-    var toc = document.querySelectorAll('[data-xdoc-toc] a');
-    if (toc.length && 'IntersectionObserver' in window) {
-      var byId = {};
-      toc.forEach(function (a) { byId[a.getAttribute('href').slice(1)] = a; });
-      var io = new IntersectionObserver(function (es) {
-        es.forEach(function (en) {
-          if (en.isIntersecting && byId[en.target.id]) {
-            toc.forEach(function (a) { a.classList.remove('is-active'); });
-            byId[en.target.id].classList.add('is-active');
-          }
+    if ('IntersectionObserver' in window) {
+      document.querySelectorAll('[data-xdoc-toc]').forEach(function (tocEl) {
+        var links = tocEl.querySelectorAll('a');
+        if (!links.length) return;
+        var byId = {};
+        links.forEach(function (a) { byId[a.getAttribute('href').slice(1)] = a; });
+        var io = new IntersectionObserver(function (es) {
+          es.forEach(function (en) {
+            if (en.isIntersecting && byId[en.target.id]) {
+              links.forEach(function (a) { a.classList.remove('is-active'); });
+              byId[en.target.id].classList.add('is-active');
+            }
+          });
+        }, { rootMargin: '-20% 0px -65% 0px' });
+        Object.keys(byId).forEach(function (id) {
+          var el = document.getElementById(id);
+          if (el) io.observe(el);
         });
-      }, { rootMargin: '-20% 0px -65% 0px' });
-      Object.keys(byId).forEach(function (id) {
-        var el = document.getElementById(id);
-        if (el) io.observe(el);
       });
     }
   }

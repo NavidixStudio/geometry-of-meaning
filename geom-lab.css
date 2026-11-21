@@ -22,7 +22,8 @@
 #stage, #science {
   scroll-margin-top: 78px;
 }
-#science.xdoc {
+#science.xdoc,
+#science .xdoc {
   --xdoc-accent: #8FDBFF;
   --xdoc-accent-soft: rgba(143, 219, 255, .12);
   --xdoc-accent-line: rgba(143, 219, 255, .36);
@@ -1292,4 +1293,88 @@ html.gmx-locked [id*="nvx-push"] {
   font-size: 13.5px;
   line-height: 1.95;
   color: rgba(237, 242, 250, 0.76);
+}
+
+/* =====================================================================
+   BILINGUAL EN / FA SWITCHER & LTR TYPOGRAPHY POLISH
+   ===================================================================== */
+.xbar__actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+.gm-lang-switch {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px;
+  border-radius: 999px;
+  border: 1px solid rgba(143, 219, 255, 0.34);
+  background: rgba(9, 13, 21, 0.88);
+  direction: ltr;
+}
+.gm-lang-btn {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: rgba(237, 242, 250, 0.62);
+  font-family: var(--xp-f-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 4px 9px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.16s ease, color 0.16s ease;
+}
+.gm-lang-btn:hover { color: #fff; }
+.gm-lang-btn[aria-pressed="true"] {
+  background: rgba(143, 219, 255, 0.22);
+  color: #D9F4FF;
+  box-shadow: inset 0 0 0 1px rgba(143, 219, 255, 0.48);
+}
+.gmx-icon-btn--lang {
+  font-family: var(--xp-f-mono);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  border-color: rgba(143, 219, 255, 0.38);
+  color: #D9F4FF;
+}
+.gmx-icon-btn--lang:hover {
+  border-color: rgba(143, 219, 255, 0.75);
+  background: rgba(143, 219, 255, 0.14);
+}
+
+html[lang="en"] [data-lang-block="fa"],
+html[lang="fa"] [data-lang-block="en"],
+html[lang="en"] #nvx-push-banner,
+html[lang="en"] section.nvxcm,
+html[lang="en"] aside.nvxcta,
+html[lang="en"] #topbar-join {
+  display: none !important;
+}
+
+html[lang="en"] {
+  --xp-f-fa: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+html[lang="en"] body {
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.65;
+}
+html[lang="en"] .xhero h1,
+html[lang="en"] .xdoc__title,
+html[lang="en"] .xdoc__sec h2 {
+  font-family: "Sora", "Inter", system-ui, sans-serif;
+  letter-spacing: -0.02em;
+  line-height: 1.22;
+}
+html[lang="en"] .xhero__lede,
+html[lang="en"] .xp__q,
+html[lang="en"] .gmx-story,
+html[lang="en"] .xdoc__sec p,
+html[lang="en"] .xdoc__sub {
+  line-height: 1.72;
+}
+html[lang="en"] .xdoc__formula small {
+  direction: ltr;
+  font-family: "Inter", system-ui, sans-serif;
 }

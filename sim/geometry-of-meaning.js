@@ -444,6 +444,130 @@
   ];
 
   /* =====================================================================
+     3B. ENGLISH BILINGUAL DICTIONARY (100% GLOBAL COVERAGE)
+     ===================================================================== */
+  var WORDS_EN = {
+    king: 'King', queen: 'Queen', man: 'Man', woman: 'Woman', prince: 'Prince', princess: 'Princess',
+    iran: 'Iran', tehran: 'Tehran', france: 'France', paris: 'Paris', japan: 'Japan', tokyo: 'Tokyo',
+    tiger: 'Tiger', leopard: 'Leopard', jungle: 'Jungle', roar: 'Roar', hunt: 'Hunt', deer: 'Deer',
+    coffee: 'Coffee', bread: 'Bread', honey: 'Honey', breakfast: 'Breakfast', cup: 'Cup', warm: 'Hot',
+    pipe: 'Pipe', drop: 'Drop', wrench: 'Wrench', basin: 'Basin', pressure: 'Pressure', drip: 'Drip',
+    vector: 'Vector', matrix: 'Matrix', neuron: 'Neuron', equation: 'Equation', algorithm: 'Algorithm', light: 'Light'
+  };
+  var DIM_NAMES_EN = [
+    'Animate / Human', 'Status / Power', 'Gender', 'Geography',
+    'Food / Warmth', 'Wildlife', 'Water / Tools', 'Science / Logic'
+  ];
+  var CLUSTERS_EN = {
+    royalty:   'Royalty & Human',
+    geography: 'Geography & Capitals',
+    wildlife:  'Wildlife & Nature',
+    food:      'Food & Breakfast',
+    water:     'Water & Plumbing',
+    science:   'Science & AI'
+  };
+  var SENTENCES_EN = {
+    wildlife: 'Wildlife (Lion)',
+    food:     'Breakfast (Milk)',
+    water:    'Plumbing (Faucet)',
+    none:     'No Context (Ambiguous)'
+  };
+  var PROMPTS_EN = {
+    factual: {
+      prefix: 'The capital city of France is',
+      words: ['Paris', 'Lyon', 'Marseille', 'Bordeaux', 'London', 'Tehran', 'Tokyo', 'beautiful', 'coffee', 'wrench']
+    },
+    creative: {
+      prefix: 'In the quiet night, stars shimmered across the',
+      words: ['dark', 'endless', 'desert', 'blue', 'city', 'dream', 'silent', 'glass', 'matrix', 'plumbing']
+    }
+  };
+  var CHAPTERS_EN = {
+    space: {
+      story: 'Inside a language model, no word is just text — it is a <b>numerical point</b> on a high-dimensional hypersphere. Here, 36 concepts sit in a real 8D semantic space: related words naturally form clusters without anyone hand-labeling them. <b>Click any word in 3D</b> to inspect its 8D fingerprint and cosine neighbors.'
+    },
+    algebra: {
+      story: 'When meaning lives as geometry, you can do <b>arithmetic with concepts</b>. The red arrow measures the vector from <b>Man → Woman</b>, and the cyan arrow translates that exact same vector onto <b>King</b> — landing directly beside <b>Queen</b>. Switch to the capital-city equations and drag the parallel-transport slider.'
+    },
+    attention: {
+      story: 'In Persian, the single word <b>“Shīr” (شیر)</b> simultaneously means <b>Lion</b>, <b>Milk</b>, and <b>Faucet</b>. At Layer 0 it floats ambiguously between all three worlds. Pick a sentence below and push the <b>Transformer Layer slider (0 → 12)</b>: live <b>Self-Attention beams</b> pull “Shīr” along its residual stream straight into the right semantic cluster.'
+    },
+    temperature: {
+      story: 'An LLM does not look up “truth” — it builds a <b>Softmax probability distribution</b> over its vocabulary and samples the next token. Crank up <b>Temperature</b> and hit <b>Sample Next Token</b>: low temperature always picks the safest peak, while high temperature lifts red tail tokens (“Tehran” or “wrench” for the capital of France!) — the mathematical root of <b>hallucination</b>.'
+    },
+    limits: {
+      story: 'An honest caveat: frontier 2026 LLMs live in <b>thousands of dimensions</b>, while our screens show only 3D. Drag the <b>SO(8) Hidden-Slice Angle</b> slider: not a single number in the real 8D vectors changes, yet words that appeared close from one angle separate completely from another. Any 3D chart is only a shadow of a vastly larger space.'
+    }
+  };
+  var UI_EN = {
+    'page.title': 'The Geometry of Meaning — Interactive 3D Word Embeddings, Self-Attention & Softmax Lab | Navidix',
+    'nav.explore': '← Interactive Science Labs',
+    'crumb.home': 'Navidix',
+    'crumb.explore': 'Science Labs',
+    'crumb.cur': 'The Geometry of Meaning',
+    'hero.b1': 'Experience 06 · Interactive 3D LLM Internals',
+    'hero.b2': 'Live WebGL Engine · Fullscreen · Click Any Word',
+    'hero.h1': 'The Geometry of Meaning<span class="xhero__en">How LLMs Represent Thought, Attention &amp; Hallucination in 3D</span>',
+    'hero.lede': 'Some claim AI “just copies from a giant database of sentences”; others imagine “a brain that feels words like we do.” <b>Both pictures are wrong.</b> To a language model, words are neither text nor feelings — they are <b>points and angles in a high-dimensional geometric space</b>. Step inside that space: run vector algebra, watch Self-Attention disambiguate a 3-way homonym, and trigger real Softmax hallucinations.',
+    'hero.cta1': 'Launch 3D Meaning Lab',
+    'hero.cta2': 'Scientific Deep Dive & Formulas',
+    'stage.q': 'Why does subtracting <b>Man</b> from <b>King</b> and adding <b>Woman</b> land a cold matrix straight onto <b>Queen</b> — and how does one ambiguous word travel to three completely different planets depending on its sentence? <b>Test it live in 3D.</b>',
+    'ch.1.no': '01', 'ch.1.t': 'Map of Meaning',
+    'ch.2.no': '02', 'ch.2.t': 'Vector Algebra',
+    'ch.3.no': '03', 'ch.3.t': 'Self-Attention (“Shīr”)',
+    'ch.4.no': '04', 'ch.4.t': 'Temp & Hallucination',
+    'ch.5.no': '05', 'ch.5.t': 'Shadow of 12,000D',
+    'ch.free': 'Free Lab',
+    'leg.1': 'Royalty & Human',
+    'leg.2': 'Geography & Capitals',
+    'leg.3': 'Wildlife',
+    'leg.4': 'Food & Breakfast',
+    'leg.5': 'Water & Tools',
+    'leg.6': 'Science & AI',
+    'leg.7': '“Shīr” Crystal (Live Query)',
+    'tool.orbit': 'Orbit',
+    'stage.hint': 'Drag to orbit 3D · Click any word to inspect its 8D vector · Scroll to zoom · Press F for Fullscreen',
+    'ft.title': 'Select Free Lab Tool <span class="gmx-panel-tag">FREE LAB</span>',
+    'ft.1': '36-Word Galaxy (Click & Inspect)',
+    'ft.2': 'Vector Algebra',
+    'ft.3': '“Shīr” Attention Engine',
+    'ft.4': 'Temperature & Hallucination Lab',
+    'ft.5': 'Rotating 8D → 3D Slice',
+    'al.title': 'Choose a Vector Equation <span class="gmx-panel-tag">A + (C − B)</span>',
+    'al.1': 'King − Man + Woman',
+    'al.2': 'Tehran − Iran + France',
+    'al.3': 'Tehran − Iran + Japan',
+    'al.4': 'Prince − Man + Woman',
+    'al.sl': 'Parallel Transport of Difference Vector',
+    'at.title': 'Change Context & Watch “Shīr” Travel <span class="gmx-panel-tag">Self-Attention</span>',
+    'at.s1': 'In the silent <mark>jungle</mark>, the <span class="gmx-probe-hl">Shīr</span> (lion) suddenly let out a <mark>roar</mark> and leaped toward a <mark>deer</mark>.',
+    'at.s2': 'For <mark>breakfast</mark>, I drank a <mark>warm</mark> <mark>cup</mark> of <span class="gmx-probe-hl">Shīr</span> (milk) with <mark>honey</mark> and <mark>bread</mark>.',
+    'at.s3': 'He tightened the <span class="gmx-probe-hl">Shīr</span> (faucet) with a <mark>wrench</mark> to stop every <mark>drip</mark> and <mark>drop</mark> from the <mark>pipe</mark>.',
+    'at.s4': 'Isolated word only: <span class="gmx-probe-hl">Shīr</span> (no context — Layer 0)',
+    'at.sl': 'Transformer Layer Depth',
+    'at.a1': 'Similarity to “Tiger” (Wildlife)',
+    'at.a2': 'Similarity to “Coffee” (Drink)',
+    'at.a3': 'Similarity to “Pipe” (Plumbing)',
+    'tp.title': 'Temperature, Nucleus Cutoff & Next-Token Sampler <span class="gmx-panel-tag">Softmax(z / T)</span>',
+    'tp.p1': 'Factual prompt: “The capital city of France is …”',
+    'tp.p2': 'Creative prompt: “In the quiet night, stars shimmered across the …”',
+    'tp.slt': 'Temperature (T) — Deterministic to Chaotic',
+    'tp.slp': 'Nucleus Cutoff (Top-P) — Trim Low-Prob Tail',
+    'tp.btn': 'Sample Next Token (Live Draw)',
+    'tp.ent': 'Shannon Entropy (Uncertainty)',
+    'tp.rsk': 'Hallucination / Error Risk',
+    'tp.hist': 'Recent Sampled Tokens:',
+    'lm.title': 'Real 8D → 3D Orthonormal Slice Rotation <span class="gmx-panel-tag">SO(8) Projection</span>',
+    'lm.sl': 'Hidden-Dimension Slice Angle (watch the dashed line between “King” and “Pipe”)',
+    'bar.reset': 'Reset',
+    'next.1.k': 'Experience 07 · Next',
+    'next.1.t': 'Inside a 3nm CPU — Foveros 3D Chiplets, GAA Transistor & FLIR Heat PDE',
+    'next.2.k': 'Experience 05',
+    'next.2.t': 'The Hidden Network — Why the Internet Is Both Resilient and Fragile',
+    'foot.copy': '<span aria-hidden="true">©</span> 2026 <b>Navidix Studio</b> — Built solo by <a href="https://navidixstudio.com/about.html"><b>Mohammad Navidi</b></a>.<br />Open-sourced under MIT on <a href="https://github.com/NavidixStudio/geometry-of-meaning"><b>GitHub</b></a>.'
+  };
+
+  /* =====================================================================
      4. PROCEDURAL GLOW TEXTURE HELPER (ZERO EXTRA NETWORK FILES)
      ===================================================================== */
   function makeGlowTexture(THREE, innerRgba, midRgba) {
@@ -490,6 +614,7 @@
 
     /* Application state */
     var state = {
+      lang: 'fa',
       chapter: 'space',
       freeMode: false,
       freeSub: 'attention',
@@ -520,6 +645,36 @@
       /* 8D Slice state */
       sliceDeg: 0
     };
+
+    (function detectInitialLang() {
+      var def = (document.documentElement.getAttribute('data-default-lang') || 'fa').toLowerCase();
+      var chosen = def === 'en' ? 'en' : 'fa';
+      try {
+        var saved = localStorage.getItem('nvx_gm_lang');
+        if (saved === 'en' || saved === 'fa') chosen = saved;
+      } catch (_) {}
+      try {
+        var qLang = (new URL(location.href).searchParams.get('lang') || '').toLowerCase();
+        if (qLang === 'en' || qLang === 'fa') chosen = qLang;
+      } catch (_) {}
+      state.lang = chosen;
+    })();
+
+    function isEn() { return state.lang === 'en'; }
+    function nf(v) { return isEn() ? String(v) : fa(v); }
+    function pctSign() { return isEn() ? '%' : '٪'; }
+    function wLabel(w) { return (isEn() && WORDS_EN[w.id]) ? WORDS_EN[w.id] : w.fa; }
+    function cName(c) { return (isEn() && CLUSTERS_EN[c]) ? CLUSTERS_EN[c] : CLUSTERS[c].name; }
+    function dimName(i) { return isEn() ? DIM_NAMES_EN[i] : DIM_NAMES[i]; }
+    function candWord(promptId, item) {
+      if (!isEn()) return item.word;
+      var p = PROMPTS_EN[promptId];
+      return (p && p.words[item.idx]) ? p.words[item.idx] : item.word;
+    }
+    function promptPrefix(promptId, fallback) {
+      if (!isEn()) return fallback;
+      return (PROMPTS_EN[promptId] && PROMPTS_EN[promptId].prefix) || fallback;
+    }
 
     /* Read initial ?c= chapter query param if present */
     try {
@@ -572,7 +727,7 @@
       fsButtons.forEach(function (b) {
         b.setAttribute('aria-pressed', String(on));
         var sp = b.querySelector('span');
-        if (sp) sp.textContent = on ? 'خروج از تمام‌صفحه' : 'تمام‌صفحه';
+        if (sp) sp.textContent = isEn() ? (on ? 'Exit Fullscreen' : 'Fullscreen') : (on ? 'خروج از تمام‌صفحه' : 'تمام‌صفحه');
       });
       onResize();
       setTimeout(onResize, 60);
@@ -598,13 +753,17 @@
       document.addEventListener(ev, function () { if (!fauxFull) paintFullButtons(); });
     });
 
+    function paintDockBtn() {
+      if (!dockBtn) return;
+      dockBtn.setAttribute('aria-pressed', String(state.dockHidden));
+      var sp = dockBtn.querySelector('span');
+      if (sp) sp.textContent = isEn() ? (state.dockHidden ? 'Show Panel' : 'Hide Panel') : (state.dockHidden ? 'نمایش پنل' : 'مخفی‌کردن پنل');
+    }
     if (dockBtn) {
       dockBtn.addEventListener('click', function () {
         state.dockHidden = !state.dockHidden;
         fsWrap.classList.toggle('is-dock-hidden', state.dockHidden);
-        dockBtn.setAttribute('aria-pressed', String(state.dockHidden));
-        var sp = dockBtn.querySelector('span');
-        if (sp) sp.textContent = state.dockHidden ? 'نمایش پنل' : 'مخفی‌کردن پنل';
+        paintDockBtn();
       });
     }
 
@@ -620,7 +779,7 @@
       playButtons.forEach(function (b) {
         b.setAttribute('aria-pressed', String(state.running));
         var sp = b.querySelector('span');
-        if (sp) sp.textContent = state.running ? 'توقف' : 'اجرا';
+        if (sp) sp.textContent = isEn() ? (state.running ? 'Pause' : 'Play') : (state.running ? 'توقف' : 'اجرا');
       });
     }
     playButtons.forEach(function (b) {
@@ -672,15 +831,15 @@
         var mag = Math.min(46, Math.abs(val) * 48);
         var topPct = val >= 0 ? (50 - mag) : 50;
         var bg = val >= 0 ? w.colorHex : '#E31B23';
-        return '<div class="gmx-vec-col" title="' + DIM_NAMES[i] + ': ' + val.toFixed(2) + '">' +
+        return '<div class="gmx-vec-col" title="' + dimName(i) + ': ' + val.toFixed(2) + '">' +
                '<div class="gmx-vec-fill" style="top:' + topPct + '%;height:' + Math.max(3, mag) + '%;background:' + bg + '"></div>' +
                '</div>';
       }).join('');
 
       var nbHtml = top3.map(function (item) {
         return '<button type="button" class="gmx-nb-btn" data-jump-word="' + item.word.id + '">' +
-               '<span>' + item.word.fa + '</span>' +
-               '<span class="gmx-nb-meta">cos ' + fa(item.sim.toFixed(2)) + ' · ' + fa(Math.round(item.deg)) + '°</span>' +
+               '<span>' + wLabel(item.word) + '</span>' +
+               '<span class="gmx-nb-meta">cos ' + nf(item.sim.toFixed(2)) + ' · ' + nf(Math.round(item.deg)) + '°</span>' +
                '</button>';
       }).join('');
 
@@ -688,16 +847,16 @@
         '<div class="gmx-insp__head">' +
           '<div class="gmx-insp__title">' +
             '<span class="gmx-insp__dot" style="background:' + w.colorHex + ';box-shadow:0 0 12px ' + w.colorHex + '"></span>' +
-            '<span class="gmx-insp__word">' + w.fa + '</span>' +
-            '<span class="gmx-insp__cluster">' + CLUSTERS[w.cluster].name + '</span>' +
+            '<span class="gmx-insp__word">' + wLabel(w) + '</span>' +
+            '<span class="gmx-insp__cluster">' + cName(w.cluster) + '</span>' +
           '</div>' +
-          '<button type="button" class="gmx-insp__close" aria-label="بستن" data-insp-close>×</button>' +
+          '<button type="button" class="gmx-insp__close" aria-label="' + (isEn() ? 'Close' : 'بستن') + '" data-insp-close>×</button>' +
         '</div>' +
-        '<p class="gmx-insp__sec-title">اثرانگشت بردار ۸بعدی (ابعاد نهفته):</p>' +
+        '<p class="gmx-insp__sec-title">' + (isEn() ? '8D Vector Fingerprint (Latent Dimensions):' : 'اثرانگشت بردار ۸بعدی (ابعاد نهفته):') + '</p>' +
         '<div class="gmx-vec-bars">' + barsHtml + '</div>' +
-        '<p class="gmx-insp__sec-title">نزدیک‌ترین همسایه‌ها در ۸ بُعد (کلیک برای پرش):</p>' +
+        '<p class="gmx-insp__sec-title">' + (isEn() ? 'Nearest Neighbors in 8D (click to jump):' : 'نزدیک‌ترین همسایه‌ها در ۸ بُعد (کلیک برای پرش):') + '</p>' +
         '<div class="gmx-insp__neighbors">' + nbHtml + '</div>' +
-        '<p class="gmx-insp__sec-title" style="margin-top:8px;margin-bottom:0">دورترین واژه: <b style="color:#fff">' + farthest.word.fa + '</b> (زاویه ' + fa(Math.round(farthest.deg)) + '°)</p>';
+        '<p class="gmx-insp__sec-title" style="margin-top:8px;margin-bottom:0">' + (isEn() ? 'Farthest word: ' : 'دورترین واژه: ') + '<b style="color:#fff">' + wLabel(farthest.word) + '</b> (' + (isEn() ? 'angle ' : 'زاویه ') + nf(Math.round(farthest.deg)) + '°)</p>';
 
       inspectorEl.hidden = false;
 
@@ -734,13 +893,15 @@
       });
       if (eqFormulaEl) {
         eqFormulaEl.innerHTML =
-          '<span>' + wa.fa + '</span><span class="gmx-eq-op">−</span>' +
-          '<span>' + wb.fa + '</span><span class="gmx-eq-op">+</span>' +
-          '<span>' + wc.fa + '</span><span class="gmx-eq-op">≈</span>' +
-          '<span class="gmx-eq-res">' + wt.fa + '</span>';
+          '<span>' + wLabel(wa) + '</span><span class="gmx-eq-op">−</span>' +
+          '<span>' + wLabel(wb) + '</span><span class="gmx-eq-op">+</span>' +
+          '<span>' + wLabel(wc) + '</span><span class="gmx-eq-op">≈</span>' +
+          '<span class="gmx-eq-res">' + wLabel(wt) + '</span>';
       }
       if (eqSimEl) {
-        eqSimEl.innerHTML = 'شباهت کسینوسی واقعی: <b>' + fa(sim.toFixed(3)) + '</b> · زاویه ' + fa(deg.toFixed(1)) + '°';
+        eqSimEl.innerHTML = isEn()
+          ? ('True Cosine Similarity: <b>' + sim.toFixed(3) + '</b> · Angle ' + deg.toFixed(1) + '°')
+          : ('شباهت کسینوسی واقعی: <b>' + fa(sim.toFixed(3)) + '</b> · زاویه ' + fa(deg.toFixed(1)) + '°');
       }
       updateTelemetry();
     }
@@ -773,7 +934,7 @@
       });
       ['wildlife', 'food', 'water'].forEach(function (k) {
         var pct = Math.round(att.affinities[k] * 100);
-        if (affEls[k + 'Val']) affEls[k + 'Val'].textContent = fa(pct) + '٪';
+        if (affEls[k + 'Val']) affEls[k + 'Val'].textContent = nf(pct) + pctSign();
         if (affEls[k + 'Bar']) affEls[k + 'Bar'].style.width = pct + '%';
       });
       updateTelemetry();
@@ -817,26 +978,27 @@
                     (it.kind === 'wild' ? ' is-hallucination' : '') +
                     (it.idx === state.sampledIdx ? ' is-sampled' : '');
           return '<div class="' + cls + '">' +
-                 '<span class="gmx-prob-word">' + it.word + '</span>' +
+                 '<span class="gmx-prob-word">' + candWord(state.promptId, it) + '</span>' +
                  '<span class="gmx-prob-track"><span class="gmx-prob-fill" style="width:' + Math.max(0.6, rawPct).toFixed(1) + '%;background:' + barColor + '"></span></span>' +
-                 '<span class="gmx-prob-pct">' + (it.inNucleus ? fa(pct.toFixed(1)) + '٪' : 'حذف') + '</span>' +
+                 '<span class="gmx-prob-pct">' + (it.inNucleus ? nf(pct.toFixed(1)) + pctSign() : (isEn() ? 'CUT' : 'حذف')) + '</span>' +
                  '</div>';
         }).join('');
       }
       var chosen = sm.items[state.sampledIdx] || sm.items[0];
       if (promptPrevEl) {
         var tokCls = 'gmx-sampled-token' + (chosen.kind === 'safe' ? ' is-safe' : (chosen.kind === 'wild' ? ' is-wild' : ''));
-        promptPrevEl.innerHTML = sm.prompt.prefix + ' <span class="' + tokCls + '">' + chosen.word + '</span>';
+        promptPrevEl.innerHTML = promptPrefix(state.promptId, sm.prompt.prefix) + ' <span class="' + tokCls + '">' + candWord(state.promptId, chosen) + '</span>';
       }
-      if (entropyValEl) entropyValEl.textContent = fa(sm.entropy.toFixed(2)) + ' بیت';
+      if (entropyValEl) entropyValEl.textContent = nf(sm.entropy.toFixed(2)) + (isEn() ? ' bits' : ' بیت');
       if (riskValEl) {
         var riskPct = Math.round(sm.wildRisk * 100);
-        riskValEl.textContent = fa(riskPct) + '٪';
+        riskValEl.textContent = nf(riskPct) + pctSign();
         riskValEl.style.color = riskPct >= 25 ? '#FF6A5A' : (riskPct >= 8 ? '#F5B754' : '#3EE0A8');
       }
       if (sampleHistEl) {
         sampleHistEl.innerHTML = state.sampleHistory.slice(-7).map(function (h) {
-          return '<span class="gmx-hist-chip' + (h.kind === 'wild' ? ' is-wild' : '') + '">' + h.word + '</span>';
+          var lbl = (h.idx != null && sm.items[h.idx]) ? candWord(state.promptId, sm.items[h.idx]) : h.word;
+          return '<span class="gmx-hist-chip' + (h.kind === 'wild' ? ' is-wild' : '') + '">' + lbl + '</span>';
         }).join('');
       }
       updateTelemetry();
@@ -852,7 +1014,7 @@
       }
       state.sampledIdx = pick.idx;
       state.sampleFlash = 1.0;
-      state.sampleHistory.push({ word: pick.word, kind: pick.kind });
+      state.sampleHistory.push({ idx: pick.idx, word: pick.word, kind: pick.kind });
       if (state.sampleHistory.length > 14) state.sampleHistory.shift();
       paintTempPanel();
     }
@@ -889,36 +1051,37 @@
     }
 
     function syncAllSliders() {
-      if (slAnalogy) { slAnalogy.value = state.analogyProgress; setSlVal('analogy', fa(Math.round(state.analogyProgress * 100)) + '٪'); }
-      if (slLayer)   { slLayer.value = state.layer; setSlVal('layer', 'لایه ' + fa(Math.round(state.layer)) + ' از ۱۲'); }
-      if (slTemp)    { slTemp.value = state.temperature; setSlVal('temp', 'T = ' + fa(state.temperature.toFixed(2))); }
-      if (slTopP)    { slTopP.value = state.topP; setSlVal('topp', 'Top-P = ' + fa(Math.round(state.topP * 100)) + '٪'); }
-      if (slSlice)   { slSlice.value = state.sliceDeg; setSlVal('slice', fa(Math.round(state.sliceDeg)) + '°'); }
+      var en = isEn();
+      if (slAnalogy) { slAnalogy.value = state.analogyProgress; setSlVal('analogy', nf(Math.round(state.analogyProgress * 100)) + pctSign()); }
+      if (slLayer)   { slLayer.value = state.layer; setSlVal('layer', en ? ('Layer ' + Math.round(state.layer) + ' of 12') : ('لایه ' + fa(Math.round(state.layer)) + ' از ۱۲')); }
+      if (slTemp)    { slTemp.value = state.temperature; setSlVal('temp', 'T = ' + nf(state.temperature.toFixed(2))); }
+      if (slTopP)    { slTopP.value = state.topP; setSlVal('topp', 'Top-P = ' + nf(Math.round(state.topP * 100)) + pctSign()); }
+      if (slSlice)   { slSlice.value = state.sliceDeg; setSlVal('slice', nf(Math.round(state.sliceDeg)) + '°'); }
     }
 
     if (slAnalogy) slAnalogy.addEventListener('input', function () {
       state.analogyProgress = parseFloat(slAnalogy.value);
-      setSlVal('analogy', fa(Math.round(state.analogyProgress * 100)) + '٪');
+      setSlVal('analogy', nf(Math.round(state.analogyProgress * 100)) + pctSign());
       updateTelemetry();
     });
     if (slLayer) slLayer.addEventListener('input', function () {
       state.layer = parseFloat(slLayer.value);
-      setSlVal('layer', 'لایه ' + fa(Math.round(state.layer)) + ' از ۱۲');
+      setSlVal('layer', isEn() ? ('Layer ' + Math.round(state.layer) + ' of 12') : ('لایه ' + fa(Math.round(state.layer)) + ' از ۱۲'));
       paintAttentionPanel();
     });
     if (slTemp) slTemp.addEventListener('input', function () {
       state.temperature = parseFloat(slTemp.value);
-      setSlVal('temp', 'T = ' + fa(state.temperature.toFixed(2)));
+      setSlVal('temp', 'T = ' + nf(state.temperature.toFixed(2)));
       paintTempPanel();
     });
     if (slTopP) slTopP.addEventListener('input', function () {
       state.topP = parseFloat(slTopP.value);
-      setSlVal('topp', 'Top-P = ' + fa(Math.round(state.topP * 100)) + '٪');
+      setSlVal('topp', 'Top-P = ' + nf(Math.round(state.topP * 100)) + pctSign());
       paintTempPanel();
     });
     if (slSlice) slSlice.addEventListener('input', function () {
       state.sliceDeg = parseFloat(slSlice.value);
-      setSlVal('slice', fa(Math.round(state.sliceDeg)) + '°');
+      setSlVal('slice', nf(Math.round(state.sliceDeg)) + '°');
       updateTelemetry();
     });
 
@@ -941,39 +1104,53 @@
 
     function updateTelemetry() {
       if (!telemetryEl) return;
+      var en = isEn();
       var m = activeMode();
       var chips = [];
       if (m === 'space') {
-        chips.push('<span class="gmx-chip gmx-chip--ion">بُعد واقعی: <strong>۸ بُعد ← ۳ بُعد</strong></span>');
-        chips.push('<span class="gmx-chip">واژگان: <strong>۳۶ واژه · ۶ خوشه</strong></span>');
+        chips.push('<span class="gmx-chip gmx-chip--ion">' + (en ? 'Projection: <strong>8D → 3D</strong>' : 'بُعد واقعی: <strong>۸ بُعد ← ۳ بُعد</strong>') + '</span>');
+        chips.push('<span class="gmx-chip">' + (en ? 'Lexicon: <strong>36 Words · 6 Clusters</strong>' : 'واژگان: <strong>۳۶ واژه · ۶ خوشه</strong>') + '</span>');
         if (state.selectedWordId && WORD_BY_ID[state.selectedWordId]) {
-          chips.push('<span class="gmx-chip gmx-chip--accent">انتخاب‌شده: <strong>' + WORD_BY_ID[state.selectedWordId].fa + '</strong></span>');
+          chips.push('<span class="gmx-chip gmx-chip--accent">' + (en ? 'Selected' : 'انتخاب‌شده') + ': <strong>' + wLabel(WORD_BY_ID[state.selectedWordId]) + '</strong></span>');
         }
       } else if (m === 'algebra') {
         var an = ANALOGIES.find(function (x) { return x.id === state.analogyId; }) || ANALOGIES[0];
         var wa = WORD_BY_ID[an.a], wb = WORD_BY_ID[an.b], wc = WORD_BY_ID[an.c], wt = WORD_BY_ID[an.expected];
         var rv = vNorm(vAdd(vSub(wa.v, wb.v), wc.v));
-        chips.push('<span class="gmx-chip gmx-chip--accent">مقصد: <strong>' + wt.fa + '</strong></span>');
-        chips.push('<span class="gmx-chip gmx-chip--ion">cos(θ): <strong>' + fa(cosSim(rv, wt.v).toFixed(3)) + '</strong></span>');
+        chips.push('<span class="gmx-chip gmx-chip--accent">' + (en ? 'Target' : 'مقصد') + ': <strong>' + wLabel(wt) + '</strong></span>');
+        chips.push('<span class="gmx-chip gmx-chip--ion">cos(θ): <strong>' + nf(cosSim(rv, wt.v).toFixed(3)) + '</strong></span>');
       } else if (m === 'attention') {
         var att = computeAttentionState(state.sentenceId, state.layer);
-        chips.push('<span class="gmx-chip gmx-chip--accent">بافت «شیر»: <strong>' + att.sentence.title + '</strong></span>');
-        chips.push('<span class="gmx-chip gmx-chip--ion">لایه: <strong>' + fa(Math.round(state.layer)) + ' / ۱۲</strong></span>');
+        var sTitle = en ? (SENTENCES_EN[att.sentence.id] || att.sentence.title) : att.sentence.title;
+        chips.push('<span class="gmx-chip gmx-chip--accent">' + (en ? '“Shīr” Context' : 'بافت «شیر»') + ': <strong>' + sTitle + '</strong></span>');
+        chips.push('<span class="gmx-chip gmx-chip--ion">' + (en ? 'Layer' : 'لایه') + ': <strong>' + nf(Math.round(state.layer)) + ' / ' + (en ? '12' : '۱۲') + '</strong></span>');
       } else if (m === 'temperature') {
         var sm = computeSoftmax(state.promptId, state.temperature, state.topP);
-        chips.push('<span class="gmx-chip gmx-chip--accent">دما: <strong>T = ' + fa(state.temperature.toFixed(2)) + '</strong></span>');
-        chips.push('<span class="gmx-chip gmx-chip--ion">آنتروپی: <strong>' + fa(sm.entropy.toFixed(2)) + ' بیت</strong></span>');
-        chips.push('<span class="gmx-chip">سرگشتگی: <strong>' + fa(sm.perplexity.toFixed(1)) + '</strong></span>');
+        chips.push('<span class="gmx-chip gmx-chip--accent">' + (en ? 'Temp' : 'دما') + ': <strong>T = ' + nf(state.temperature.toFixed(2)) + '</strong></span>');
+        chips.push('<span class="gmx-chip gmx-chip--ion">' + (en ? 'Entropy' : 'آنتروپی') + ': <strong>' + nf(sm.entropy.toFixed(2)) + (en ? ' bits' : ' بیت') + '</strong></span>');
+        chips.push('<span class="gmx-chip">' + (en ? 'Perplexity' : 'سرگشتگی') + ': <strong>' + nf(sm.perplexity.toFixed(1)) + '</strong></span>');
       } else if (m === 'limits') {
         var pKing = project8to3(WORD_BY_ID.king.v, state.sliceDeg * Math.PI / 180);
         var pPipe = project8to3(WORD_BY_ID.pipe.v, state.sliceDeg * Math.PI / 180);
         var d3 = Math.hypot(pKing[0] - pPipe[0], pKing[1] - pPipe[1], pKing[2] - pPipe[2]) / RADIUS;
         var deg8 = angleDeg(WORD_BY_ID.king.v, WORD_BY_ID.pipe.v);
-        chips.push('<span class="gmx-chip gmx-chip--ion">برش SO(8): <strong>' + fa(Math.round(state.sliceDeg)) + '°</strong></span>');
-        chips.push('<span class="gmx-chip gmx-chip--accent">زاویه واقعی ۸بُعدی: <strong>' + fa(Math.round(deg8)) + '° (ثابت)</strong></span>');
-        chips.push('<span class="gmx-chip">فاصله‌ی ظاهری ۳بُعدی: <strong>' + fa(d3.toFixed(2)) + '</strong></span>');
+        chips.push('<span class="gmx-chip gmx-chip--ion">' + (en ? 'SO(8) Slice' : 'برش SO(8)') + ': <strong>' + nf(Math.round(state.sliceDeg)) + '°</strong></span>');
+        chips.push('<span class="gmx-chip gmx-chip--accent">' + (en ? 'True 8D Angle' : 'زاویه واقعی ۸بُعدی') + ': <strong>' + nf(Math.round(deg8)) + (en ? '° (invariant)' : '° (ثابت)') + '</strong></span>');
+        chips.push('<span class="gmx-chip">' + (en ? 'Apparent 3D Dist' : 'فاصله‌ی ظاهری ۳بُعدی') + ': <strong>' + nf(d3.toFixed(2)) + '</strong></span>');
       }
       telemetryEl.innerHTML = chips.join('');
+    }
+
+    function paintStoryBox() {
+      if (!storyEl) return;
+      if (state.freeMode) {
+        storyEl.innerHTML = isEn()
+          ? '<b>Free Lab Active:</b> Choose any interactive module below, click any word in 3D space to inspect its 8D vector, orbit freely, or hit <b>Fullscreen</b> for the spatial observatory view.'
+          : '<b>آزمایشگاه آزاد فعال است:</b> هر ابزاری را می‌خواهی پایین انتخاب کن، روی هر واژه در فضا کلیک کن، دوربین را آزادانه بچرخان و از دکمه‌ی <b>تمام‌صفحه</b> برای تجربه‌ی سینمایی استفاده کن.';
+      } else {
+        var ch = CHAPTERS.find(function (x) { return x.id === state.chapter; }) || CHAPTERS[0];
+        storyEl.innerHTML = (isEn() && CHAPTERS_EN[ch.id]) ? CHAPTERS_EN[ch.id].story : ch.story;
+      }
     }
 
     function setChapter(id, pushUrl) {
@@ -984,13 +1161,9 @@
         b.setAttribute('aria-current', String(b.getAttribute('data-gm-ch') === id));
       });
 
-      if (state.freeMode) {
-        if (storyEl) {
-          storyEl.innerHTML = '<b>آزمایشگاه آزاد فعال است:</b> هر ابزاری را می‌خواهی پایین انتخاب کن، روی هر واژه در فضا کلیک کن، دوربین را آزادانه بچرخان و از دکمه‌ی <b>تمام‌صفحه</b> برای تجربه‌ی سینمایی استفاده کن.';
-        }
-      } else {
+      paintStoryBox();
+      if (!state.freeMode) {
         var ch = CHAPTERS.find(function (x) { return x.id === id; }) || CHAPTERS[0];
-        if (storyEl) storyEl.innerHTML = ch.story;
         if (orbit && ch.camera) orbit.goTo(ch.camera);
         if (id === 'limits') {
           state.sliceDeg = 0;
@@ -1415,7 +1588,7 @@
         var lbl = document.createElement('span');
         lbl.className = 'gmx-label';
         lbl.style.setProperty('--c', w.colorHex);
-        lbl.innerHTML = '<i></i><b>' + w.fa + '</b>';
+        lbl.innerHTML = '<i></i><b>' + wLabel(w) + '</b>';
         labelLayer.appendChild(lbl);
         domWordLabels.push(lbl);
       });
@@ -1549,7 +1722,7 @@
       domProbeLabel = document.createElement('span');
       domProbeLabel.className = 'gmx-label is-probe';
       domProbeLabel.style.setProperty('--c', '#FF4D55');
-      domProbeLabel.innerHTML = '<i></i><b>شیر</b><em>Query</em>';
+      domProbeLabel.innerHTML = '<i></i><b>' + (isEn() ? 'Shīr' : 'شیر') + '</b><em>Query</em>';
       labelLayer.appendChild(domProbeLabel);
 
       /* ---- Chapter 04: 3D Holographic Temperature / Softmax Arena ---- */
@@ -1956,11 +2129,12 @@
           if (projVec.z > 1) { lbl.style.opacity = '0'; continue; }
           var lx = (projVec.x * 0.5 + 0.5) * w;
           var ly = (-projVec.y * 0.5 + 0.5) * h;
-          var txt = item.word + '|' + (item.inNucleus ? Math.round(item.pEff * 100) : 'cut');
+          var wTxt = candWord(state.promptId, item);
+          var txt = state.lang + '|' + wTxt + '|' + (item.inNucleus ? Math.round(item.pEff * 100) : 'cut');
           if (lbl._cache !== txt) {
             lbl._cache = txt;
-            lbl.querySelector('b').textContent = item.word;
-            lbl.querySelector('em').textContent = item.inNucleus ? (fa(Math.round(item.pEff * 100)) + '٪') : 'حذف';
+            lbl.querySelector('b').textContent = wTxt;
+            lbl.querySelector('em').textContent = item.inNucleus ? (nf(Math.round(item.pEff * 100)) + pctSign()) : (isEn() ? 'CUT' : 'حذف');
           }
           var cHex = !item.inNucleus ? '#475569' : (item.kind === 'safe' ? '#3EE0A8' : (item.kind === 'mid' ? '#F5B754' : '#E31B23'));
           lbl.style.setProperty('--c', cHex);
@@ -2112,14 +2286,87 @@
       noteOverlay.innerHTML = html;
     }
 
+    var origDocTitle = document.title;
+    function refresh3DLabelsLang() {
+      for (var i = 0; i < domWordLabels.length; i++) {
+        var b = domWordLabels[i] && domWordLabels[i].querySelector('b');
+        if (b && WORDS[i]) b.textContent = wLabel(WORDS[i]);
+      }
+      if (domProbeLabel) {
+        var pb = domProbeLabel.querySelector('b');
+        if (pb) pb.textContent = isEn() ? 'Shīr' : 'شیر';
+      }
+      for (var t = 0; t < domTempLabels.length; t++) {
+        if (domTempLabels[t]) domTempLabels[t]._cache = '';
+      }
+    }
+
+    function applyLanguage(lang, persist) {
+      var next = (lang === 'en') ? 'en' : 'fa';
+      state.lang = next;
+      var en = (next === 'en');
+      document.documentElement.lang = next;
+      document.documentElement.dir = en ? 'ltr' : 'rtl';
+      document.title = en ? UI_EN['page.title'] : origDocTitle;
+
+      Array.prototype.slice.call(document.querySelectorAll('[data-i18n]')).forEach(function (el) {
+        if (el._faText == null) el._faText = el.textContent;
+        var k = el.getAttribute('data-i18n');
+        el.textContent = (en && UI_EN[k] != null) ? UI_EN[k] : el._faText;
+      });
+      Array.prototype.slice.call(document.querySelectorAll('[data-i18n-html]')).forEach(function (el) {
+        if (el._faHtml == null) el._faHtml = el.innerHTML;
+        var k = el.getAttribute('data-i18n-html');
+        el.innerHTML = (en && UI_EN[k] != null) ? UI_EN[k] : el._faHtml;
+      });
+      Array.prototype.slice.call(document.querySelectorAll('[data-gm-lang]')).forEach(function (btn) {
+        btn.setAttribute('aria-pressed', String(btn.getAttribute('data-gm-lang') === next));
+      });
+      Array.prototype.slice.call(document.querySelectorAll('[data-gm-lang-toggle]')).forEach(function (btn) {
+        var sp = btn.querySelector('span');
+        if (sp) sp.textContent = en ? 'فا' : 'EN';
+        btn.title = en ? 'Switch to Persian (فارسی)' : 'Switch to English';
+      });
+
+      refresh3DLabelsLang();
+      paintStoryBox();
+      if (state.selectedWordId) openInspector(state.selectedWordId);
+      syncAllSliders();
+      paintAnalogyPanel();
+      paintAttentionPanel();
+      paintTempPanel();
+      paintPlayButtons();
+      paintDockBtn();
+      paintFullButtons();
+      updateTelemetry();
+
+      if (persist) {
+        try { localStorage.setItem('nvx_gm_lang', next); } catch (_) {}
+        try {
+          var u = new URL(location.href);
+          u.searchParams.set('lang', next);
+          history.replaceState(null, '', u);
+        } catch (_) {}
+      }
+    }
+
+    Array.prototype.slice.call(document.querySelectorAll('[data-gm-lang]')).forEach(function (btn) {
+      btn.addEventListener('click', function () { applyLanguage(btn.getAttribute('data-gm-lang'), true); });
+    });
+    Array.prototype.slice.call(document.querySelectorAll('[data-gm-lang-toggle]')).forEach(function (btn) {
+      btn.addEventListener('click', function () { applyLanguage(isEn() ? 'fa' : 'en', true); });
+    });
+
     function boot() {
       if (state.ready || state.dead) return;
       if (!hasWebGL()) {
         state.dead = true;
-        sayOverlay('<b>این آزمایش سه‌بعدی به WebGL نیاز دارد</b>مرورگر شما WebGL را فعال نکرده است؛ کل توضیح علمی، فرمول‌ها و پرسش‌های پرتکرار پایین همین صفحه در دسترس است.');
+        sayOverlay(isEn()
+          ? '<b>This 3D lab requires WebGL</b>WebGL is disabled in your browser; the full scientific deep dive, equations, and references are available below.'
+          : '<b>این آزمایش سه‌بعدی به WebGL نیاز دارد</b>مرورگر شما WebGL را فعال نکرده است؛ کل توضیح علمی، فرمول‌ها و پرسش‌های پرتکرار پایین همین صفحه در دسترس است.');
         return;
       }
-      sayOverlay('<b>در حال بارگذاری فضای سه‌بعدی معنا…</b>');
+      sayOverlay(isEn() ? '<b>Loading 3D Semantic Space…</b>' : '<b>در حال بارگذاری فضای سه‌بعدی معنا…</b>');
       loadThree().then(function (T) {
         THREE = T;
         var r = canvas.getBoundingClientRect();
@@ -2143,7 +2390,9 @@
       }).catch(function (err) {
         state.dead = true;
         console.warn('[navidix/geometry-of-meaning]', err);
-        sayOverlay('<b>صحنه‌ی سه‌بعدی بارگذاری نشد</b>توضیح کامل علمی و ریاضی پایین همین صفحه در دسترس است.');
+        sayOverlay(isEn()
+          ? '<b>3D Scene Failed to Load</b>The complete scientific deep dive and equations are available below.'
+          : '<b>صحنه‌ی سه‌بعدی بارگذاری نشد</b>توضیح کامل علمی و ریاضی پایین همین صفحه در دسترس است.');
       });
     }
 
@@ -2170,13 +2419,11 @@
     else global.addEventListener('resize', onResize);
 
     /* Initialise UI text before WebGL even boots */
-    syncAllSliders();
-    paintAnalogyPanel();
-    paintAttentionPanel();
-    paintTempPanel();
+    applyLanguage(state.lang, false);
     updateVisiblePanels();
 
     var api = {
+      setLang: applyLanguage,
       openInspector: openInspector,
       closeInspector: closeInspector,
       toggleFullscreen: toggleFullscreen,
