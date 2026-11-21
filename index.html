@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>هندسه‌ی معنا | The Geometry of Meaning — هوش مصنوعی چطور بدون «فهمیدن» می‌فهمد؟ (آزمایشگاه سه‌بعدی) | نویدیکس</title>
+<meta name="description" content="آزمایشگاه سه‌بعدی تعاملی هندسه‌ی معنا در استودیو نویدیکس: چطور مدل‌های هوش مصنوعی مثل Claude، GPT و Gemini با بردارهای کلمه (Word Embeddings)، مکانیسم توجه (Self-Attention) و دمای سافت‌مکس (Temperature) زبان را می‌فهمند و چرا گاهی توهم (Hallucination) می‌زنند؟" />
+<meta name="keywords" content="هندسه معنا, هوش مصنوعی چطور کار میکند, بردار کلمه, Word Embedding, مکانیسم توجه, Self-Attention, معماری ترنسفورمر, شباهت کسینوسی, Cosine Similarity, پارامتر دما Temperature, توهم هوش مصنوعی Hallucination, Top-P, آزمایشگاه علمی تعاملی, استودیو نویدیکس, Claude Fable 5.2, GPT-6.2 Astra, Gemini 4 Neon" />
+<meta name="author" content="محمد نویدی" />
+<link rel="canonical" href="https://navidixstudio.com/explore/geometry-of-meaning/" />
+<link rel="alternate" type="text/markdown" href="https://navidixstudio.com/llms.txt" title="Navidix AI &amp; LLM Context Guide" />
+<link rel="alternate" type="text/markdown" href="https://navidixstudio.com/llms-full.txt" title="Navidix AI &amp; LLM Full Knowledge Graph" />
+<meta name="theme-color" content="#05070B" />
+<meta name="robots" content="index, follow, max-image-preview:large" />
+<meta property="og:site_name" content="Navidix" />
+<meta property="og:type" content="article" />
+<meta property="og:locale" content="fa_IR" />
+<meta property="og:title" content="هندسه‌ی معنا — هوش مصنوعی چطور بدون «فهمیدن» می‌فهمد؟ | آزمایشگاه سه‌بعدی نویدیکس" />
+<meta property="og:description" content="فضای برداری سه‌بعدی واژگان فارسی، جبر معنایی (پادشاه − مرد + زن = ملکه)، پرتوهای زنده Self-Attention برای کلمه‌ی «شیر» و شبیه‌ساز دما و ریشه‌ی توهم (Hallucination) با حالت تمام‌صفحه." />
+<meta property="og:url" content="https://navidixstudio.com/explore/geometry-of-meaning/" />
+<meta property="og:image" content="https://navidixstudio.com/og-home.png" />
+<meta property="og:image:secure_url" content="https://navidixstudio.com/og-home.png" />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="هندسه‌ی معنا — پلتفرم علمی تعاملی استودیو نویدیکس" />
+<meta property="article:published_time" content="2026-11-21T09:00:00+03:30" />
+<meta property="article:modified_time" content="2026-11-21T09:00:00+03:30" />
+<meta property="article:author" content="محمد نویدی" />
+<meta property="article:section" content="پلتفرم علمی تعاملی" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="هندسه‌ی معنا — آزمایشگاه سه‌بعدی ذهن هوش مصنوعی | نویدیکس" />
+<meta name="twitter:description" content="واژه‌ها برای ماشین کلمه نیستند؛ مختصات در فضا هستند. روی کلمات کلیک کن، پرتوهای Attention را ببین و ریشه‌ی ریاضی توهم هوش مصنوعی را امتحان کن." />
+<meta name="twitter:image" content="https://navidixstudio.com/og-home.png" />
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="icon" type="image/png" sizes="192x192" href="/navidix-icon-192.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<style>
+@font-face{font-family:'Navidix Serif';src:url('./assets/fonts/source-serif-4-latin.woff2')format('woff2');font-weight:200 900;font-style:normal;font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-200B,U+2010-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Navidix Serif';src:url('./assets/fonts/source-serif-4-latin-italic.woff2')format('woff2');font-weight:200 900;font-style:italic;font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-200B,U+2010-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Navidix Serif';src:url('./assets/fonts/source-serif-4-digits.woff2?v=3')format('woff2');font-weight:200 900;font-style:normal;font-display:swap;unicode-range:U+0660-0669,U+066B-066C,U+06F0-06F9}
+@font-face{font-family:'Estedad';src:url('./assets/fonts/estedad-var.woff2?v=3')format('woff2');font-weight:100 900;font-display:swap;font-style:normal;unicode-range:U+0600-065F,U+066A,U+066D-06EF,U+06FA-06FF,U+0750-077F,U+0870-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FEFF}
+@font-face{font-family:'Estedad';src:url('./assets/fonts/source-serif-4-digits.woff2?v=3')format('woff2');font-weight:100 900;font-display:swap;font-style:normal;unicode-range:U+0660-0669,U+066B-066C,U+06F0-06F9}
+@font-face{font-family:'Sora';src:url('./assets/fonts/sora-var.woff2')format('woff2');font-weight:100 800;font-display:swap;font-style:normal}
+@font-face{font-family:'Inter';src:url('./assets/fonts/inter-var.woff2')format('woff2');font-weight:100 900;font-display:swap;font-style:normal}
+</style>
+<link rel="stylesheet" href="./nvx-explore.css" />
+<link rel="stylesheet" href="./geom-lab.css" />
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[
+  {
+    "@type": "TechArticle",
+    "@id": "https://navidixstudio.com/explore/geometry-of-meaning/#article",
+    "headline": "هندسه‌ی معنا: هوش مصنوعی چطور بدون «فهمیدن» می‌فهمد؟",
+    "alternativeHeadline": "The Geometry of Meaning — Interactive 3D Word Embeddings, Self-Attention & Softmax Lab",
+    "description": "آزمایشگاه سه‌بعدی و توضیح جامع علمی درباره فضای برداری واژگان (Word Embeddings)، شباهت کسینوسی، جبر معنایی، مکانیسم توجه (Self-Attention) در معماری ترنسفورمر و نقش دما (Temperature) و Top-P در توهم هوش مصنوعی (Hallucination).",
+    "inLanguage": "fa-IR",
+    "datePublished": "2026-11-21T09:00:00+03:30",
+    "dateModified": "2026-11-21T09:00:00+03:30",
+    "author": {"@type": "Person", "name": "محمد نویدی", "url": "https://navidixstudio.com/about.html"},
+    "publisher": {"@type": "Organization", "name": "استودیو نویدیکس (Navidix Studio)", "url": "https://navidixstudio.com/", "logo": {"@type": "ImageObject", "url": "https://navidixstudio.com/navidix-icon-512.png"}},
+    "mainEntityOfPage": {"@type": "WebPage", "@id": "https://navidixstudio.com/explore/geometry-of-meaning/"},
+    "image": "https://navidixstudio.com/og-home.png",
+    "keywords": ["هندسه‌ی معنا", "Word Embeddings", "Self-Attention", "Transformer", "Cosine Similarity", "Temperature", "Top-P", "توهم هوش مصنوعی", "هوش مصنوعی چطور کار می‌کند"],
+    "about": [
+      {"@type": "Thing", "name": "Word Embedding"},
+      {"@type": "Thing", "name": "Transformer (deep learning architecture)"},
+      {"@type": "Thing", "name": "Attention (machine learning)"},
+      {"@type": "Thing", "name": "Hallucination (artificial intelligence)"}
+    ]
+  },
+  {
+    "@type": "LearningResource",
+    "@id": "https://navidixstudio.com/explore/geometry-of-meaning/#lab",
+    "name": "آزمایشگاه تعاملی سه‌بعدی هندسه‌ی معنا",
+    "alternateName": "The Geometry of Meaning 3D Interactive Lab",
+    "url": "https://navidixstudio.com/explore/geometry-of-meaning/",
+    "inLanguage": "fa-IR",
+    "isAccessibleForFree": true,
+    "interactivityType": "active",
+    "learningResourceType": "Interactive 3D Simulation",
+    "educationalUse": "Self-directed scientific exploration of Large Language Model internals",
+    "creator": {"@type": "Person", "name": "محمد نویدی"}
+  },
+  {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "صفحه‌ی اصلی", "item": "https://navidixstudio.com/"},
+      {"@type": "ListItem", "position": 2, "name": "پلتفرم علمی تعاملی", "item": "https://navidixstudio.com/explore/"},
+      {"@type": "ListItem", "position": 3, "name": "هندسه‌ی معنا", "item": "https://navidixstudio.com/explore/geometry-of-meaning/"}
+    ]
+  },
+  {
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "هوش مصنوعی و مدل‌های زبانی (مثل Claude، GPT و Gemini) واقعاً چطور معنی کلمات را می‌فهمند؟",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "مدل‌های زبانی بزرگ نه یک بانک جملات آماده برای کپی‌پیست هستند و نه معنای کلمات را مثل انسان تجربه و حس می‌کنند. در عوض، هر واژه یا تکه-واژه (توکن) را به یک بردار عددی با هزاران مؤلفه در یک فضای هندسی تبدیل می‌کنند. کلمه‌هایی که در بافت‌های مشابه به کار می‌روند، در این فضا زاویه‌ی کوچکی با هم می‌سازند و روابط معنایی مثل پایتخت‌بودن یا جنسیت به جهت‌های موازی هندسی تبدیل می‌شوند."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "بردار کلمه (Word Embedding) و شباهت کسینوسی (Cosine Similarity) به زبان ساده چیست؟",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "بردار کلمه یا امبدینگ، فهرستی از اعداد است که موقعیت یک واژه را در فضای معنایی مشخص می‌کند. شباهت کسینوسی، کسینوس زاویه‌ی بین دو بردار را اندازه می‌گیرد: عدد نزدیک به ۱ (زاویه‌ی نزدیک به صفر درجه) یعنی دو واژه هم‌معنا یا هم‌خانواده‌اند، عدد صفر (زاویه ۹۰ درجه) یعنی هیچ ربطی به هم ندارند و عدد منفی یعنی در جهت مخالف هم قرار گرفته‌اند."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "مکانیسم توجه (Self-Attention) در معماری ترنسفورمر دقیقاً چه کاری انجام می‌دهد؟",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "کلمه‌های چندمعنایی مثل «شیر» به‌تنهایی در نقطه‌ای مبهم قرار دارند. مکانیسم توجه (Self-Attention) به هر کلمه اجازه می‌دهد به تمام کلمه‌های دیگر در جمله نگاه کند، وزن ارتباط هرکدام را با ضرب داخلی و تابع سافت‌مکس حساب کند و بردار خودش را در هر لایه به سمت معنای دقیق همان جمله جابه‌جا کند."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "پارامتر دما (Temperature) و Top-P در هوش مصنوعی چیست و چرا باعث توهم (Hallucination) می‌شود؟",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "مدل زبانی برای انتخاب کلمه‌ی بعدی به همه‌ی واژگان فرهنگ‌لغت یک نمره (Logit) می‌دهد و با تابع Softmax آن را به احتمال تبدیل می‌کند. دما (Temperature) تیزی این توزیع را کنترل می‌کند: دمای پایین (نزدیک صفر) تقریباً همیشه محتمل‌ترین واژه را برمی‌گزیند و دقیق اما یکنواخت است؛ دمای بالا توزیع را تخت می‌کند و به واژه‌های کم‌احتمال در دُم توزیع شانس انتخاب می‌دهد که می‌تواند به پاسخ‌های خلاقانه یا توهم‌های کاملاً غلط منجر شود. پارامتر Top-P دُم کم‌احتمال توزیع را می‌بُرد تا خطر پرت‌گویی کمتر شود."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "آیا مدل‌های پرچم‌دار ۲۰۲۶ مثل Claude Fable 5.2، GPT-6.2 Astra و Gemini 4 Neon واقعاً آگاهی دارند؟",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "خیر؛ با وجود جهش خارق‌العاده‌ی مدل‌های نسل ۲۰۲۶ در استدلال ریاضی، کدنویسی و تحلیل چندرسانه‌ای، هیچ شاهد علمی وجود ندارد که این سیستم‌ها تجربه‌ی درونی یا آگاهی زیستی داشته باشند. آن‌ها نقشه‌ی هندسی فوق‌العاده دقیقی از ساختار زبان، منطق و جهان در فضاهای چندده‌هزاربعدی ساخته‌اند؛ داشتن نقشه‌ی بی‌نقص از اقیانوس به معنای حس کردن خیس بودن آب نیست."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "چرا شبیه‌ساز روی صفحه ۸ بُعدی و ۳ بُعدی است در حالی که مدل‌های واقعی هزاران بُعد دارند؟",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "چشم انسان و نمایشگر فقط ۳ بُعد فضایی را می‌بینند. در این آزمایشگاه از یک فضای ۸بُعدی واقعی و تصویرسازی متعامد خطی به ۳ بُعد (به‌همراه چرخش واقعی برش SO(8) در فصل پنجم) استفاده شده تا تمام فرمول‌های شباهت کسینوسی، جبر برداری، توجه و سافت‌مکس کاملاً واقعی و قابل لمس باشند و در عین حال نشان دهد کاهش بُعد چه اطلاعاتی را پنهان می‌کند."
+        }
+      }
+    ]
+  }
+]}</script>
+</head>
+<body>
+
+<header class="xbar"><div class="xbar__row">
+  <a class="xbar__home" href="https://navidixstudio.com/"><img src="./assets/navidix-wordmark.webp" alt="NAVIDIX" width="104" height="16" /></a>
+  <a href="https://navidixstudio.com/explore/">پلتفرم علمی تعاملی ←</a>
+</div></header>
+
+<nav class="crumb" aria-label="مسیر صفحه">
+  <ol>
+    <li><a href="https://navidixstudio.com/">نویدیکس</a></li>
+    <li><a href="https://navidixstudio.com/explore/">پلتفرم علمی تعاملی</a></li>
+    <li><span aria-current="page">هندسه‌ی معنا</span></li>
+  </ol>
+</nav>
+
+<main>
+
+<section class="xhero">
+  <div class="xhero__field" aria-hidden="true"></div>
+  <div class="xwrap xhero__in">
+    <div class="gm-hero-meta xin">
+      <span class="gm-badge">تجربه‌ی ۰۶ · نسخه‌ی پیشرفته سه‌بعدی</span>
+      <span class="gm-badge gm-badge--ion">موتور زنده WebGL · تمام‌صفحه · کلیک روی واژه‌ها</span>
+    </div>
+    <h1 class="xin xin--2">هندسه‌ی معنا<span class="xhero__en">The Geometry of Meaning</span></h1>
+    <p class="xhero__lede xin xin--3">بعضی‌ها می‌گویند هوش مصنوعی «فقط از یک بانک عظیم جملات کپی می‌کند»؛ بعضی دیگر می‌گویند «مغزی است که معنی کلمات را مثل ما حس می‌کند». <b>هر دو تصویر غلط‌اند.</b> برای ماشین، واژه‌ها نه متن‌اند و نه احساس — <b>نقطه و زاویه در یک فضای هندسی‌اند.</b> اینجا وارد همان فضا می‌شوی، با کلمات جمع و تفریق می‌کنی، پرتوهای Attention را روی کلمه‌ی «شیر» می‌بینی و با دست خودت توهم هوش مصنوعی را تولید می‌کنی.</p>
+    <hr class="xrule xin xin--3" />
+    <div class="gm-hero-actions xin xin--3">
+      <a class="xbtn xbtn--go" href="#stage">
+        <span>ورود به آزمایشگاه سه‌بعدی</span>
+        <svg class="xbtn__ind" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h14M12 6l6 6-6 6"/></svg>
+      </a>
+      <a class="xbtn" href="#science">
+        <span>خواندن تحلیل علمی و فرمول‌ها</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="xwrap xp" id="stage" aria-label="آزمایشگاه سه‌بعدی هندسه‌ی معنا">
+  <p class="xp__q">اگر «پادشاه» را از «مرد» کم کنی و «زن» را به آن اضافه کنی، چرا یک ماشینِ بی‌احساس دقیقاً روی <b>«ملکه»</b> فرود می‌آید؟ و چرا کلمه‌ی <b>«شیر»</b> در جمله‌ی جنگل و جمله‌ی صبحانه به دو سیاره‌ی کاملاً متفاوت سفر می‌کند؟ <b>خودت آزمایش کن.</b></p>
+
+  <div class="gmx-fs">
+
+    <!-- 1. Guided 5-Chapter Story Rail + Free Lab -->
+    <nav class="gmx-chapters" aria-label="فصل‌های آزمایشگاه سه‌بعدی">
+      <button type="button" class="gmx-ch" data-gm-ch="space" aria-current="true"><i>۰۱</i><span>نقشه‌ی معنا</span></button>
+      <button type="button" class="gmx-ch" data-gm-ch="algebra" aria-current="false"><i>۰۲</i><span>جبرِ معنا</span></button>
+      <button type="button" class="gmx-ch" data-gm-ch="attention" aria-current="false"><i>۰۳</i><span>توجه و معمای «شیر»</span></button>
+      <button type="button" class="gmx-ch" data-gm-ch="temperature" aria-current="false"><i>۰۴</i><span>دما و ریشه‌ی توهم</span></button>
+      <button type="button" class="gmx-ch" data-gm-ch="limits" aria-current="false"><i>۰۵</i><span>سایه‌ی ۱۲٬۰۰۰ بُعد</span></button>
+      <button type="button" class="gmx-ch gmx-ch--free" data-gm-ch="free" aria-current="false"><i>◆</i><span>آزمایشگاه آزاد</span></button>
+    </nav>
+
+    <!-- 2. Semantic Constellation Key -->
+    <ul class="gmx-legend" aria-label="راهنمای خوشه‌های معنایی">
+      <li><i class="gmx-legend__dot" style="--k:#F5B754"></i><span>سلطنت و انسان</span></li>
+      <li><i class="gmx-legend__dot" style="--k:#8FDBFF"></i><span>جغرافیا و پایتخت</span></li>
+      <li><i class="gmx-legend__dot" style="--k:#FF6A5A"></i><span>حیات‌وحش</span></li>
+      <li><i class="gmx-legend__dot" style="--k:#3EE0A8"></i><span>خوراک و صبحانه</span></li>
+      <li><i class="gmx-legend__dot" style="--k:#5294FF"></i><span>آب و ابزار</span></li>
+      <li><i class="gmx-legend__dot" style="--k:#A78BFA"></i><span>علم و هوش</span></li>
+      <li><i class="gmx-legend__diamond" style="--k:#E31B23"></i><span>کریستال «شیر» (پرسش زنده)</span></li>
+    </ul>
+
+    <!-- 3. The 3D WebGL Spatial Observatory -->
+    <div class="gmx-stage">
+      <canvas class="gmx-canvas" role="img" aria-label="شبیه‌ساز تعاملی سه‌بعدی فضای برداری واژگان فارسی، جبر معنایی، پرتوهای Attention و توزیع احتمال Softmax"></canvas>
+
+      <!-- Floating Top Telemetry + Quick Action Buttons -->
+      <div class="gmx-hud-top">
+        <div class="gmx-telemetry" data-gm-telemetry aria-live="polite"></div>
+        <div class="gmx-stage-tools">
+          <button type="button" class="gmx-icon-btn gmx-icon-btn--toggle-dock" data-gm-dock aria-pressed="false" title="مخفی یا نمایش پنل کنترل در تمام‌صفحه">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 14h18"/></svg>
+            <span>مخفی‌کردن پنل</span>
+          </button>
+          <button type="button" class="gmx-icon-btn" data-gm-orbit aria-pressed="true" title="چرخش خودکار دوربین">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v6h-6"/></svg>
+            <span>چرخش</span>
+          </button>
+          <button type="button" class="gmx-icon-btn gmx-icon-btn--fs" data-gm-fs aria-pressed="false" title="حالت تمام‌صفحه (کلید F)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4H4v5M15 4h5v5M9 20H4v-5M15 20h5v-5"/></svg>
+            <span>تمام‌صفحه</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Projected Crisp Persian 3D Labels -->
+      <div class="gmx-labels" aria-hidden="true"></div>
+
+      <!-- Interactive Click-to-Inspect 8D Vector Card -->
+      <aside class="gmx-inspector" data-gm-inspector hidden aria-label="بازرس بردار ۸بعدی واژه"></aside>
+
+      <!-- Gesture / Shortcut Hint -->
+      <p class="gmx-hint">بکش تا بچرخانی · روی هر واژه کلیک کن تا بردارش باز شود · اسکرول برای زوم · کلید F تمام‌صفحه</p>
+
+      <!-- Loading / WebGL Fallback Overlay -->
+      <div class="xstage__note"><b>در حال آماده‌سازی فضای سه‌بعدی معنا…</b></div>
+    </div>
+
+    <!-- 4. Interactive Cockpit Deck -->
+    <div class="gmx-deck">
+
+      <!-- Free Lab Sub-Mode Switcher -->
+      <div class="gmx-mode-panel" data-gm-panel="freetabs" hidden>
+        <div class="gmx-panel-head" style="margin-bottom:8px">
+          <p class="gmx-panel-title">انتخاب ابزار آزمایشگاه آزاد <span class="gmx-panel-tag">FREE LAB</span></p>
+        </div>
+        <div class="gmx-pills" style="margin-bottom:0">
+          <button type="button" class="gmx-pill" data-gm-freesub="space" aria-pressed="false">کهکشان ۳۶ واژه (کلیک و بازرسی)</button>
+          <button type="button" class="gmx-pill" data-gm-freesub="algebra" aria-pressed="false">جبر برداری کلمات</button>
+          <button type="button" class="gmx-pill" data-gm-freesub="attention" aria-pressed="true">موتور Attention «شیر»</button>
+          <button type="button" class="gmx-pill" data-gm-freesub="temperature" aria-pressed="false">آزمایشگاه دما و توهم</button>
+          <button type="button" class="gmx-pill" data-gm-freesub="limits" aria-pressed="false">برش چرخشی ۸ بُعد ← ۳ بُعد</button>
+        </div>
+      </div>
+
+      <!-- Guided Narrative Sentence -->
+      <div class="gmx-story" data-gm-story aria-live="polite"></div>
+
+      <!-- MODE 02: Vector Algebra Playground -->
+      <div class="gmx-mode-panel" data-gm-panel="algebra" hidden>
+        <div class="gmx-panel-head">
+          <p class="gmx-panel-title">معادله‌ی برداری را انتخاب کن <span class="gmx-panel-tag">A + (C − B)</span></p>
+        </div>
+        <div class="gmx-pills">
+          <button type="button" class="gmx-pill" data-gm-analogy="king" aria-pressed="true">پادشاه − مرد + زن</button>
+          <button type="button" class="gmx-pill" data-gm-analogy="paris" aria-pressed="false">تهران − ایران + فرانسه</button>
+          <button type="button" class="gmx-pill" data-gm-analogy="tokyo" aria-pressed="false">تهران − ایران + ژاپن</button>
+          <button type="button" class="gmx-pill" data-gm-analogy="prince" aria-pressed="false">شاهزاده − مرد + زن</button>
+        </div>
+        <div class="gmx-eq-box">
+          <div class="gmx-eq-formula" data-gm-eq-formula></div>
+          <div class="gmx-eq-sim" data-gm-eq-sim></div>
+        </div>
+        <div class="gmx-sliders">
+          <div class="gmx-slider-card">
+            <div class="gmx-slider-top">
+              <label class="gmx-slider-label" for="gm-sl-analogy">انتقال موازی بردار تفاوت روی مبدأ</label>
+              <span class="gmx-slider-val" data-gm-val="analogy">۱۰۰٪</span>
+            </div>
+            <input id="gm-sl-analogy" type="range" min="0" max="1" step="0.01" value="1" data-gm-sl="analogy" />
+          </div>
+        </div>
+      </div>
+
+      <!-- MODE 03: Polysemy & Real Self-Attention -->
+      <div class="gmx-mode-panel" data-gm-panel="attention" hidden>
+        <div class="gmx-panel-head">
+          <p class="gmx-panel-title">بافت جمله را عوض کن و سفر «شیر» را ببین <span class="gmx-panel-tag">Self-Attention</span></p>
+        </div>
+        <div class="gmx-pills">
+          <button type="button" class="gmx-pill" data-gm-sent="wildlife" aria-pressed="true">در سکوت <mark>جنگل</mark>، <span class="gmx-probe-hl">شیر</span> ناگهان <mark>غرش</mark> کرد و به سمت <mark>آهو</mark> پرید.</button>
+          <button type="button" class="gmx-pill" data-gm-sent="food" aria-pressed="false">برای <mark>صبحانه</mark> یک <mark>فنجان</mark> <span class="gmx-probe-hl">شیر</span> <mark>داغ</mark> با <mark>عسل</mark> و <mark>نان</mark> نوشیدم.</button>
+          <button type="button" class="gmx-pill" data-gm-sent="water" aria-pressed="false">با <mark>آچار</mark> پیچ <span class="gmx-probe-hl">شیر</span> را سفت کرد تا <mark>چکه</mark> و <mark>قطره</mark> از <mark>لوله</mark> قطع شود.</button>
+          <button type="button" class="gmx-pill" data-gm-sent="none" aria-pressed="false">فقط واژه‌ی تنها: <span class="gmx-probe-hl">شیر</span> (بدون بافت — لایه ۰)</button>
+        </div>
+        <div class="gmx-sliders">
+          <div class="gmx-slider-card">
+            <div class="gmx-slider-top">
+              <label class="gmx-slider-label" for="gm-sl-layer">عمق عبور از لایه‌های ترنسفورمر</label>
+              <span class="gmx-slider-val" data-gm-val="layer">لایه ۹ از ۱۲</span>
+            </div>
+            <input id="gm-sl-layer" type="range" min="0" max="12" step="0.2" value="9" data-gm-sl="layer" />
+          </div>
+        </div>
+        <div class="gmx-affinities">
+          <div class="gmx-aff">
+            <div class="gmx-aff__top"><span class="gmx-aff__name">شباهت به «ببر» (حیوان)</span><span class="gmx-aff__val" style="--c:#FF6A5A" data-gm-aff-val="wildlife">۰٪</span></div>
+            <div class="gmx-aff__track"><div class="gmx-aff__bar" style="--c:#FF6A5A" data-gm-aff-bar="wildlife"></div></div>
+          </div>
+          <div class="gmx-aff">
+            <div class="gmx-aff__top"><span class="gmx-aff__name">شباهت به «قهوه» (نوشیدنی)</span><span class="gmx-aff__val" style="--c:#3EE0A8" data-gm-aff-val="food">۰٪</span></div>
+            <div class="gmx-aff__track"><div class="gmx-aff__bar" style="--c:#3EE0A8" data-gm-aff-bar="food"></div></div>
+          </div>
+          <div class="gmx-aff">
+            <div class="gmx-aff__top"><span class="gmx-aff__name">شباهت به «لوله» (لوله‌کشی)</span><span class="gmx-aff__val" style="--c:#5294FF" data-gm-aff-val="water">۰٪</span></div>
+            <div class="gmx-aff__track"><div class="gmx-aff__bar" style="--c:#5294FF" data-gm-aff-bar="water"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MODE 04: Softmax Temperature, Top-P & Live Token Sampler -->
+      <div class="gmx-mode-panel" data-gm-panel="temperature" hidden>
+        <div class="gmx-panel-head">
+          <p class="gmx-panel-title">آزمایشگاه دما، برش هسته و تولید کلمه‌ی بعدی <span class="gmx-panel-tag">Softmax(z / T)</span></p>
+        </div>
+        <div class="gmx-pills">
+          <button type="button" class="gmx-pill" data-gm-prompt="factual" aria-pressed="true">جمله‌ی دانشی: «پایتخت کشور فرانسه شهرِ …»</button>
+          <button type="button" class="gmx-pill" data-gm-prompt="creative" aria-pressed="false">جمله‌ی ادبی: «در سکوت شب، ستاره‌ها در آسمانِ …»</button>
+        </div>
+        <div class="gmx-sliders" style="margin-bottom:13px">
+          <div class="gmx-slider-card">
+            <div class="gmx-slider-top">
+              <label class="gmx-slider-label" for="gm-sl-temp">دما (Temperature) — از قطعی تا آشفته</label>
+              <span class="gmx-slider-val" data-gm-val="temp">T = ۰٫۸۵</span>
+            </div>
+            <input id="gm-sl-temp" type="range" min="0.05" max="2.20" step="0.05" value="0.85" data-gm-sl="temp" />
+          </div>
+          <div class="gmx-slider-card">
+            <div class="gmx-slider-top">
+              <label class="gmx-slider-label" for="gm-sl-topp">برش هسته (Top-P) — حذف دُمِ کم‌احتمال</label>
+              <span class="gmx-slider-val" data-gm-val="topp">Top-P = ۹۲٪</span>
+            </div>
+            <input id="gm-sl-topp" type="range" min="0.30" max="1.00" step="0.02" value="0.92" data-gm-sl="topp" />
+          </div>
+        </div>
+        <div class="gmx-temp-grid">
+          <div class="gmx-prob-list" data-gm-probs></div>
+          <div class="gmx-sampler-box">
+            <p class="gmx-prompt-preview" data-gm-prompt-preview></p>
+            <button type="button" class="xbtn xbtn--go" data-gm-sample-btn style="justify-content:center">
+              <span>تولید کلمه‌ی بعدی (نمونه‌گیری زنده)</span>
+            </button>
+            <div class="gmx-entropy-row">
+              <div class="gmx-metric-mini"><span>آنتروپی شانون (عدم‌قطعیت)</span><b data-gm-entropy>۰٫۰۰ بیت</b></div>
+              <div class="gmx-metric-mini"><span>احتمال توهم / خطا</span><b data-gm-risk>۰٪</b></div>
+            </div>
+            <div>
+              <p class="gmx-insp__sec-title" style="margin-bottom:5px">آخرین نمونه‌گیری‌ها:</p>
+              <div class="gmx-sample-history" data-gm-sample-hist></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MODE 05: 8D -> 3D Orthonormal Givens Slice Rotation -->
+      <div class="gmx-mode-panel" data-gm-panel="limits" hidden>
+        <div class="gmx-panel-head">
+          <p class="gmx-panel-title">چرخش واقعی برش ۸ بُعد روی صفحه‌ی ۳ بُعدی <span class="gmx-panel-tag">SO(8) Projection</span></p>
+        </div>
+        <div class="gmx-sliders">
+          <div class="gmx-slider-card">
+            <div class="gmx-slider-top">
+              <label class="gmx-slider-label" for="gm-sl-slice">زاویه‌ی برش ابعاد پنهان (فاصله‌ی خط‌چین بین «پادشاه» و «لوله» را ببین)</label>
+              <span class="gmx-slider-val" data-gm-val="slice">۰°</span>
+            </div>
+            <input id="gm-sl-slice" type="range" min="0" max="90" step="1" value="0" data-gm-sl="slice" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Playback & Fullscreen Control Strip -->
+      <div class="gmx-bar">
+        <div class="gmx-bar__group">
+          <button type="button" class="xbtn xbtn--go xbtn--icon" data-gm-play aria-pressed="true">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 5h3.4v14H7zM13.6 5H17v14h-3.4z"/></svg>
+            <span>توقف</span>
+          </button>
+          <button type="button" class="xbtn xbtn--icon" data-gm-reset>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.6-5.9"/><path d="M20 4.2V9h-4.8"/></svg>
+            <span>بازنشانی</span>
+          </button>
+        </div>
+        <button type="button" class="xbtn xbtn--icon" data-gm-fs aria-pressed="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4H4v5M15 4h5v5M9 20H4v-5M15 20h5v-5"/></svg>
+          <span>تمام‌صفحه</span>
+        </button>
+      </div>
+
+    </div><!-- /.gmx-deck -->
+
+  </div><!-- /.gmx-fs -->
+</section>
+
+<!-- =====================================================================
+     AUTHORITATIVE SCIENTIFIC PROSE & SEO KNOWLEDGE BASE
+     ===================================================================== -->
+<section class="xwrap xdoc" id="science" aria-label="تحلیل علمی و ریاضی هندسه‌ی معنا در هوش مصنوعی">
+
+  <header class="xdoc__head">
+    <p class="xdoc__eyebrow">SCIENTIFIC DEEP DIVE · کالبدشکافی ریاضی ذهن مدل‌های زبانی</p>
+    <h2 class="xdoc__title">ماشین چطور بدون «فهمیدن» می‌فهمد؟ از بردارهای کلمه تا ریشه‌ی توهم</h2>
+    <p class="xdoc__sub">مرور کامل معادلات، هندسه‌ی فضای معنایی، مکانیسم توجه در معماری ترنسفورمر و دلیل ریاضیِ بروز توهم (<span class="xdoc__en">Hallucination</span>) در مدل‌های هوش مصنوعی نسل جدید.</p>
+
+    <div class="xdoc__kpis" aria-label="اعداد کلیدی فضای معنایی مدل‌های زبانی">
+      <div class="xdoc__kpi">
+        <small>ابعاد بردار کلمه در مدل‌های ۲۰۲۶</small>
+        <b>4K – 12K D</b>
+        <span>هر واژه یک نقطه در فضای چندده‌هزاربعدی است</span>
+      </div>
+      <div class="xdoc__kpi">
+        <small>سنجه شباهت معنایی</small>
+        <b>cos(θ)</b>
+        <span>زاویه‌ی کوچک = هم‌معنا · ۹۰ درجه = کاملاً بی‌ربط</span>
+      </div>
+      <div class="xdoc__kpi">
+        <small>موتور رفع ابهام کلمات</small>
+        <b>Self-Attention</b>
+        <span>جابه‌جایی بردار کلمه در طول لایه‌ها با وزن بافت</span>
+      </div>
+      <div class="xdoc__kpi">
+        <small>کنترل خلاقیت در برابر توهم</small>
+        <b>Temp · Top-P</b>
+        <span>تنظیم تیزی توزیع <span class="xdoc__en">Softmax</span> و برش دُم کم‌احتمال</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="xdoc__layout">
+
+    <aside class="xdoc__aside" aria-label="فهرست بخش‌های علمی هندسه‌ی معنا">
+      <div class="xdoc__aside-head">فهرست بخش‌ها <span>TOC</span></div>
+      <ul class="xdoc__toc" data-xdoc-toc>
+        <li><a href="#gm-sec-0" class="is-active"><i>۰۰</i><span>دو افسانه‌ی رایج</span></a></li>
+        <li><a href="#gm-sec-1"><i>۰۱</i><span>بردار کلمه و کسینوس</span></a></li>
+        <li><a href="#gm-sec-2"><i>۰۲</i><span>جبر معنا (پادشاه − مرد)</span></a></li>
+        <li><a href="#gm-sec-3"><i>۰۳</i><span>مکانیسم توجه و «شیر»</span></a></li>
+        <li><a href="#gm-sec-4"><i>۰۴</i><span>دما، Top-P و توهم</span></a></li>
+        <li><a href="#gm-sec-5"><i>۰۵</i><span>صداقت علمی شبیه‌ساز</span></a></li>
+        <li><a href="#gm-sec-6"><i>۰۶</i><span>۵ آزمایش کلیدی</span></a></li>
+        <li><a href="#gm-sec-faq"><i>۰۷</i><span>پرسش‌های پرتکرار و منابع</span></a></li>
+      </ul>
+      <a class="xdoc__back" href="#stage">↑ بازگشت به آزمایشگاه سه‌بعدی</a>
+    </aside>
+
+    <div class="xdoc__body">
+
+      <article class="xdoc__sec" id="gm-sec-0">
+        <span class="xdoc__sec-kicker">مقدمه · شکستن دو تصویر غلط</span>
+        <h2>دو افسانه‌ی رایج درباره‌ی اینکه «هوش مصنوعی چطور می‌فهمد»</h2>
+        <p>هر وقت از مدل‌های زبانی بزرگ — از <strong>Claude Fable 5.2</strong> و <strong>GPT-6.2 Astra</strong> تا <strong>Gemini 4 Neon</strong> و <strong>DeepSeek V4.1</strong> — سؤالی می‌پرسیم و جوابی دقیق، ظریف یا حتی شاعرانه می‌گیریم، ذهن ما معمولاً به سمت یکی از دو افراط می‌رود:</p>
+
+        <div class="xdoc__grid2">
+          <div class="xdoc__card xdoc__card--warn">
+            <span class="xdoc__card-tag">افسانه‌ی اول · غلط</span>
+            <h3>«فقط کپی‌پیست از یک دیتابیس عظیم است»</h3>
+            <p>اگر مدل فقط جمله‌های اینترنت را حفظ کرده بود، با یک معمای ریاضی تازه، یک کد جدید یا یک استعاره‌ی ساخته‌نشده بلافاصله فلج می‌شد. مدل‌های مدرن هیچ دیتابیسی از متن‌های خام داخل وزن‌هایشان ذخیره نمی‌کنند.</p>
+          </div>
+          <div class="xdoc__card xdoc__card--warn">
+            <span class="xdoc__card-tag">افسانه‌ی دوم · غلط</span>
+            <h3>«مثل انسان معنی کلمات را حس می‌کند»</h3>
+            <p>مدل هرگز گرمای یک فنجان قهوه را نچشیده، صدای غرش شیر را نشنیده و ترس را تجربه نکرده است. درون میلیاردها پارامتر آن هیچ آگاهی زیستی یا تصویر ذهنیِ انسانی وجود ندارد.</p>
+          </div>
+        </div>
+
+        <div class="xdoc__callout">
+          <span class="xdoc__callout-label">حقیقت ریاضی · معنا به شکل «هندسه» ذخیره می‌شود</span>
+          <p>هوش مصنوعی زبان را به <strong>فضا</strong> ترجمه می‌کند. هر واژه (یا تکه-واژه‌ای به نام <strong>توکن</strong>) به یک نقطه روی کُره‌ای با هزاران بُعد تبدیل می‌شود؛ به‌طوری که <strong>نزدیکیِ معنایی معادل کوچک بودن زاویه‌ی دو بردار</strong>، و <strong>روابط مفهومی معادل جهت‌های موازی در فضا</strong> است. ماشین به جای اینکه معنی را «حس» کند، در هندسه‌ی آن <strong>حرکت و محاسبه</strong> می‌کند.</p>
+        </div>
+      </article>
+
+      <article class="xdoc__sec" id="gm-sec-1">
+        <span class="xdoc__sec-kicker">فصل ۰۱ · Word Embeddings</span>
+        <h2>بردار کلمه و شباهت کسینوسی به زبان ساده چیست؟</h2>
+        <p>کامپیوتر حرف «ش» یا «ی» یا «ر» را نمی‌فهمد؛ تنها چیزی که پردازنده‌های گرافیکی بلدند، <strong>ضرب و جمع اعداد اعشاری</strong> است. بنابراین نخستین کاری که هر مدل زبانی هنگام خواندن جمله‌ی تو انجام می‌دهد این است که هر توکن را به یک <strong>بردار عددی</strong> (<span class="xdoc__en">Embedding Vector</span>) تبدیل کند.</p>
+        <p>در آزمایشگاه بالای این صفحه، هر واژه یک بردار <strong>۸بُعدی</strong> واقعی دارد تا بتوانی روی هر کلمه کلیک کنی و اثرانگشت عددی آن را ببینی. اما در مدل‌های پرچم‌دار سال ۲۰۲۶، هر واژه می‌تواند بین <strong>۴٬۰۹۶ تا بیش از ۱۲٬۰۰۰ بُعد</strong> داشته باشد! هیچ مهندسی به‌صورت دستی به کامپیوتر نگفته بُعد شماره ۴۲ «سلطنت» باشد یا بُعد شماره ۹۱۹ «جغرافیای اروپا». مدل طی خواندن تریلیون‌ها کلمه و تمرینِ مداوم برای حدس زدن کلمه‌ی بعدی، <strong>خودش کشف می‌کند</strong> که بهترین راهِ فشرده‌سازی زبان این است که واژه‌های هم‌نقش را در یک محله‌ی هندسی بچیند.</p>
+
+        <div class="xdoc__formula">
+          <span class="xdoc__formula-eq">cos(θ) = (u · v) / (‖u‖ · ‖v‖)</span>
+          <small>فرمول شباهت کسینوسی: عدد نزدیک به ۱ یعنی دو واژه هم‌جهت و هم‌معنا هستند؛ عدد ۰ (زاویه‌ی ۹۰ درجه) یعنی کاملاً بی‌ربط‌اند.</small>
+        </div>
+
+        <p>چرا دانشمندان به‌جای فاصله‌ی خط‌کشی معمولی، <strong>زاویه (کسینوس)</strong> را اندازه می‌گیرند؟ چون طول یک بردار ممکن است فقط تحت تأثیر تکرار زیاد یک کلمه در متن‌ها تغییر کند، اما <strong>جهتِ بردار روی کُره‌ی واحد</strong> دقیقاً حامل هویت معنایی آن است. در فصل اول آزمایشگاه، وقتی روی «ببر» کلیک می‌کنی، «پلنگ» با زاویه‌ای حدود ۶ درجه کنارش ایستاده و «معادله» با زاویه‌ای نزدیک به ۹۰ درجه در آن سوی فضا قرار دارد.</p>
+      </article>
+
+      <article class="xdoc__sec" id="gm-sec-2">
+        <span class="xdoc__sec-kicker">فصل ۰۲ · Linear Representation</span>
+        <h2>معجزه‌ی جبرِ معنا: چرا «پادشاه − مرد + زن = ملکه» کار می‌کند؟</h2>
+        <p>در سال ۲۰۱۳، توماس میکولوف و همکارانش در گوگل (پژوهش کلاسیک <span class="xdoc__en">Word2Vec</span>) پدیده‌ای را کشف کردند که نگاه بشر به زبان را زیرورو کرد: روابط معنایی در فضای برداری به‌صورت <strong>جهت‌های خطی و موازی</strong> ظاهر می‌شوند. یعنی اگر برداری که «مرد» را به «زن» وصل می‌کند برداری و عیناً روی «پادشاه» بگذاری، سرِ پیکان در همسایگی «ملکه» فرود می‌آید.</p>
+        <p>همین هندسه برای جغرافیا، زمان فعل‌ها و حتی سبک نوشتار هم برقرار است: جهتی که «ایران» را به «تهران» می‌برد، تقریباً موازی جهتی است که «فرانسه» را به «پاریس» و «ژاپن» را به «توکیو» وصل می‌کند. پژوهش‌های متأخر در حوزه‌ی <strong>تفسیرپذیری مکانیکی</strong> (<span class="xdoc__en">Mechanistic Interpretability</span>) نشان داده‌اند که حتی مفاهیم انتزاعی‌تر — مثل «صداقت در برابر فریب»، «کد دارای باگ» یا «لحن رسمی در برابر محاوره‌ای» — نیز به‌شکل جهت‌های مشخصی درون فضای برداری مدل‌های مدرن کدگذاری می‌شوند.</p>
+      </article>
+
+      <article class="xdoc__sec" id="gm-sec-3">
+        <span class="xdoc__sec-kicker">فصل ۰۳ · Self-Attention</span>
+        <h2>معمای کلمه‌ی «شیر» و انقلاب مکانیسم توجه</h2>
+        <p>مدل‌های برداری اولیه یک نقص کشنده داشتند: هر کلمه فقط <strong>یک نقطه‌ی ثابت</strong> در فضا داشت! حالا زبان فارسی را تصور کن: کلمه‌ی <strong>«شیر»</strong> هم حیوان درنده‌ی جنگل است، هم نوشیدنی صبحانه، هم وسیله‌ی باز و بسته کردن آبِ لوله. یک بردار ثابت مجبور است وسط هر سه جهان بایستد و در واقع هیچ‌کدام نباشد.</p>
+        <p>در سال ۲۰۱۷، مقاله‌ی تاریخ‌ساز <span class="xdoc__en">Attention Is All You Need</span> معماری <strong>ترنسفورمر</strong> را معرفی کرد و قفل این معما را شکست. راه‌حل شگفت‌آور اما از نظر ریاضی ساده بود: به هر کلمه اجازه بده در هر لایه به همه‌ی کلمه‌های دیگرِ جمله «نگاه» کند، وزن ارتباطشان را بسنجد و مختصات خودش را به‌روزرسانی کند:</p>
+
+        <div class="xdoc__formula">
+          <span class="xdoc__formula-eq">Attention(Q, K, V) = softmax( (Q · Kᵀ) / √dₖ ) · V</span>
+          <small>پرسشِ کلمه‌ی هدف (<code>Q</code>) با کلیدهای کلمه‌های اطراف (<code>K</code>) ضرب داخلی می‌شود، وزن‌ها با <code>Softmax</code> نرمال می‌شوند و مقدارها (<code>V</code>) بردار کلمه را در فضا جابه‌جا می‌کنند.</small>
+        </div>
+
+        <p>در <strong>فصل سوم آزمایشگاه</strong> دقیقاً همین اتفاق را می‌بینی: در لایه‌ی صفر، کریستال «شیر» وسط مثلثِ حیات‌وحش، خوراک و لوله‌کشی معلق است. به‌محض اینکه جمله‌ی «برای صبحانه یک فنجان شیر داغ با عسل و نان نوشیدم» را انتخاب می‌کنی و اسلایدر لایه را از ۰ به ۱۲ می‌بری، پرتوهای توجه از «صبحانه»، «فنجان» و «عسل» به سمت «شیر» کشیده می‌شوند و موقعیت آن را از طریق جریانِ باقیمانده (<span class="xdoc__en">Residual Stream</span>) واقعاً به کنار «قهوه» می‌رسانند.</p>
+      </article>
+
+      <article class="xdoc__sec" id="gm-sec-4">
+        <span class="xdoc__sec-kicker">فصل ۰۴ · Softmax, Temperature &amp; Top-P</span>
+        <h2>دما، برش هسته (Top-P) و ریشه‌ی ریاضی توهم (Hallucination)</h2>
+        <p>پس از اینکه جمله‌ی تو از آخرین لایه‌ی ترنسفورمر عبور کرد، مدل یک بردار نهایی در دست دارد و می‌خواهد <strong>تنها یک تصمیم</strong> بگیرد: کلمه‌ی بعدی چیست؟ مدل به تک‌تک کلمه‌های فرهنگ‌لغتش (معمولاً ۱۰۰ تا ۲۵۶ هزار توکن) یک نمره‌ی خام (<code>Logit</code>) می‌دهد و با تابع <code>Softmax</code> آن را به درصد احتمال تبدیل می‌کند:</p>
+
+        <div class="xdoc__formula">
+          <span class="xdoc__formula-eq">Pᵢ(T) = exp(zᵢ / T) / Σⱼ exp(zⱼ / T)</span>
+          <small>هرچه دمای <code>T</code> کوچک‌تر باشد، برنده‌ی اول تقریباً ۱۰۰٪ احتمال را می‌بلعد؛ هرچه <code>T</code> بزرگ‌تر شود، توزیع تخت‌تر شده و واژه‌های پرت شانس انتخاب می‌گیرند.</small>
+        </div>
+
+        <div class="xdoc__grid2">
+          <div class="xdoc__card xdoc__card--warn">
+            <span class="xdoc__card-tag">چرا مدل با اطمینان دروغ می‌گوید؟</span>
+            <h3>توزیع احتمال به‌جای جدول «درست و غلط»</h3>
+            <p>در دمای بالا (مثلاً بالای <code>1.4</code>)، آنتروپی منفجر می‌شود و کلمه‌های کم‌احتمال در دُمِ توزیع سهم واقعی می‌گیرند. با یک قرعه‌کشی تصادفی، مدل کلمه‌ی غلط را چاپ می‌کند و از آن لحظه به بعد ادامه را <em>بر اساس همان اشتباه قبلی</em> می‌بافد!</p>
+          </div>
+          <div class="xdoc__card xdoc__card--ok">
+            <span class="xdoc__card-tag">مهار توهم با Nucleus Sampling</span>
+            <h3>برش هسته‌ای (<code>Top-P</code>) چه می‌کند؟</h3>
+            <p>تنظیم <code>Top-P = 0.90</code> یعنی فقط برترین کلمه‌هایی را نگه دار که مجموع احتمالشان به ۹۰٪ برسد و تمام دُمِ هذیان‌گو را به‌کلی حذف کن. این را می‌توانی در <strong>فصل چهارم</strong> روی حلقه‌ی طلایی سه‌بعدی ببینی.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="xdoc__sec" id="gm-sec-5">
+        <span class="xdoc__sec-kicker">فصل ۰۵ · صداقت علمی</span>
+        <h2>این شبیه‌ساز تا کجا دقیق است و کجا ساده‌سازی کرده؟</h2>
+
+        <div class="xdoc__grid2">
+          <div class="xdoc__card xdoc__card--ok">
+            <span class="xdoc__card-tag">معادلات واقعی در مرورگر</span>
+            <h3>آنچه صددرصد واقعی است</h3>
+            <p>تمام محاسبات شباهت کسینوسی <code>cos(θ)</code>، زوایا، جبر خطی متوازی‌الاضلاع، وزن‌دهی <code>Attention</code>، تابع <code>Softmax</code> با دما، برش <code>Top-P</code>، آنتروپی شانون (<code>H = −Σ P log₂ P</code>)، سرگشتگی (<code>2ᴴ</code>) و چرخش متعامد <code>SO(8)</code> در لحظه و بدون فریب محاسبه می‌شوند.</p>
+          </div>
+          <div class="xdoc__card">
+            <span class="xdoc__card-tag">ساده‌سازی برای نمایش سه‌بعدی</span>
+            <h3>آنچه خلاصه شده است</h3>
+            <p>بردارهای ۳۶ واژه‌ی این صفحه در یک فضای ۸بُعدیِ طراحی‌شده قرار دارند، نه استخراج‌شده از وزن‌های یک مدل چندصد میلیاردی. در ترنسفورمر واقعی هر لایه علاوه بر <span class="xdoc__en">Multi-Head Attention</span> یک شبکه‌ی غیرخطی <code>MLP</code> دارد و هزاران مفهوم به‌شکل برهم‌نهی (<span class="xdoc__en">Superposition</span>) فشرده شده‌اند.</p>
+          </div>
+        </div>
+
+        <div class="xdoc__callout">
+          <span class="xdoc__callout-label">تفاوت نقشه و سرزمین</span>
+          <p>در فصل پنجم می‌بینی وقتی فضای ۸بُعدی روی ۳ بُعد تصویر می‌شود، دو کلمه‌ی بی‌ربط ممکن است از یک زاویه کنار هم دیده شوند در حالی که زاویه‌ی واقعی‌شان ۹۰ درجه است. در سطح فلسفی‌تر نیز داشتن دقیق‌ترین نقشه‌ی هندسی از اقیانوس به معنای حس کردن خیس بودن آب نیست.</p>
+        </div>
+      </article>
+
+      <article class="xdoc__sec" id="gm-sec-6">
+        <span class="xdoc__sec-kicker">فصل ۰۶ · مشاهدات کلیدی</span>
+        <h2>۵ آزمایش که همین الان می‌توانی روی صحنه‌ی سه‌بعدی امتحان کنی</h2>
+        <ul class="xdoc__obs">
+          <li><i>۰۱</i><span>در فصل اول روی <b>«پادشاه»</b> کلیک کن و ببین نزدیک‌ترین همسایه‌هایش («شاهزاده» و «ملکه») زاویه‌ای کوچک دارند، در حالی که «آچار» و «قطره» تقریباً عمود (نزدیک به ۹۰ درجه) هستند.</span></li>
+          <li><i>۰۲</i><span>در فصل دوم بین <b>«تهران − ایران + فرانسه»</b> و <b>«تهران − ایران + ژاپن»</b> جابه‌جا شو تا ببینی یک جهت هندسی واحد («پایتخت‌بودن») در کل خوشه‌ی جغرافیا تکرار شده است.</span></li>
+          <li><i>۰۳</i><span>در فصل سوم جمله‌ی <b>«صبحانه»</b> را انتخاب کن و اسلایدر لایه را آرام از <b>۰ تا ۱۲</b> بکش: ببین چطور «شیر» از ابهام جدا می‌شود و مسیرش را به سمت «قهوه» و «عسل» رسم می‌کند.</span></li>
+          <li><i>۰۴</i><span>در فصل چهارم دما را روی <b>۲٫۰۰</b> و <code>Top-P</code> را روی <b>۱۰۰٪</b> بگذار و چند بار تولید بزن تا توهم ماشین را ببینی — بعد <code>Top-P</code> را به <b>۸۵٪</b> برگردان و خاموش شدن ستون‌های قرمز را تماشا کن.</span></li>
+          <li><i>۰۵</i><span>در فصل پنجم اسلایدر برش <code>SO(8)</code> را از ۰ تا ۹۰ درجه بچرخان: زاویه‌ی واقعی ۸بُعدی بین «پادشاه» و «لوله» حتی یک‌دهم درجه تکان نمی‌خورد، اما فاصله‌ی ظاهری‌شان در تصویر سه‌بعدی مدام عوض می‌شود.</span></li>
+        </ul>
+      </article>
+
+      <article class="xdoc__sec" id="gm-sec-faq">
+        <span class="xdoc__sec-kicker">فصل ۰۷ · پرسش‌های پرتکرار و منابع</span>
+        <h2>پرسش‌های پرتکرار علمی (FAQ)</h2>
+        <div class="xdoc__faq">
+          <details open>
+            <summary>هوش مصنوعی و مدل‌های زبانی (مثل Claude، GPT و Gemini) واقعاً چطور معنی کلمات را می‌فهمند؟</summary>
+            <p>مدل‌های زبانی بزرگ نه یک بانک جملات آماده برای کپی‌پیست هستند و نه معنای کلمات را مثل انسان تجربه و حس می‌کنند. در عوض، هر واژه یا تکه-واژه (توکن) را به یک بردار عددی با هزاران مؤلفه در یک فضای هندسی تبدیل می‌کنند. کلمه‌هایی که در بافت‌های مشابه به کار می‌روند، در این فضا زاویه‌ی کوچکی با هم می‌سازند و روابط معنایی مثل پایتخت‌بودن یا جنسیت به جهت‌های موازی هندسی تبدیل می‌شوند.</p>
+          </details>
+          <details>
+            <summary>بردار کلمه (Word Embedding) و شباهت کسینوسی (Cosine Similarity) به زبان ساده چیست؟</summary>
+            <p>بردار کلمه یا امبدینگ، فهرستی از اعداد است که موقعیت یک واژه را در فضای معنایی مشخص می‌کند. شباهت کسینوسی، کسینوس زاویه‌ی بین دو بردار را اندازه می‌گیرد: عدد نزدیک به ۱ (زاویه‌ی نزدیک به صفر درجه) یعنی دو واژه هم‌معنا یا هم‌خانواده‌اند، عدد صفر (زاویه ۹۰ درجه) یعنی هیچ ربطی به هم ندارند و عدد منفی یعنی در جهت مخالف هم قرار گرفته‌اند.</p>
+          </details>
+          <details>
+            <summary>مکانیسم توجه (Self-Attention) در معماری ترنسفورمر دقیقاً چه کاری انجام می‌دهد؟</summary>
+            <p>کلمه‌های چندمعنایی مثل «شیر» به‌تنهایی در نقطه‌ای مبهم قرار دارند. مکانیسم توجه (<span class="xdoc__en">Self-Attention</span>) به هر کلمه اجازه می‌دهد به تمام کلمه‌های دیگر در جمله نگاه کند، وزن ارتباط هرکدام را با ضرب داخلی و تابع سافت‌مکس حساب کند و بردار خودش را در هر لایه به سمت معنای دقیق همان جمله جابه‌جا کند.</p>
+          </details>
+          <details>
+            <summary>پارامتر دما (Temperature) و Top-P در هوش مصنوعی چیست و چرا باعث توهم (Hallucination) می‌شود؟</summary>
+            <p>مدل زبانی برای انتخاب کلمه‌ی بعدی به همه‌ی واژگان فرهنگ‌لغت یک نمره (<code>Logit</code>) می‌دهد و با تابع <code>Softmax</code> آن را به احتمال تبدیل می‌کند. دمای پایین تقریباً همیشه محتمل‌ترین واژه را برمی‌گزیند و دقیق اما یکنواخت است؛ دمای بالا توزیع را تخت می‌کند و به واژه‌های کم‌احتمال در دُم توزیع شانس انتخاب می‌دهد که می‌تواند به پاسخ‌های خلاقانه یا توهم‌های کاملاً غلط منجر شود. پارامتر <code>Top-P</code> دُم کم‌احتمال توزیع را می‌بُرد تا خطر پرت‌گویی کمتر شود.</p>
+          </details>
+          <details>
+            <summary>آیا مدل‌های پرچم‌دار ۲۰۲۶ مثل Claude Fable 5.2، GPT-6.2 Astra و Gemini 4 Neon واقعاً آگاهی دارند؟</summary>
+            <p>خیر؛ با وجود جهش خارق‌العاده‌ی مدل‌های نسل ۲۰۲۶ در استدلال ریاضی، کدنویسی و تحلیل چندرسانه‌ای، هیچ شاهد علمی وجود ندارد که این سیستم‌ها تجربه‌ی درونی یا آگاهی زیستی داشته باشند. آن‌ها نقشه‌ی هندسی فوق‌العاده دقیقی از ساختار زبان، منطق و جهان در فضاهای چندده‌هزاربعدی ساخته‌اند؛ داشتن نقشه‌ی بی‌نقص از اقیانوس به معنای حس کردن خیس بودن آب نیست.</p>
+          </details>
+          <details>
+            <summary>چرا شبیه‌ساز روی صفحه ۸ بُعدی و ۳ بُعدی است در حالی که مدل‌های واقعی هزاران بُعد دارند؟</summary>
+            <p>چشم انسان و نمایشگر فقط ۳ بُعد فضایی را می‌بینند. در این آزمایشگاه از یک فضای ۸بُعدی واقعی و تصویرسازی متعامد خطی به ۳ بُعد (به‌همراه چرخش واقعی برش <code>SO(8)</code> در فصل پنجم) استفاده شده تا تمام فرمول‌های شباهت کسینوسی، جبر برداری، توجه و سافت‌مکس کاملاً واقعی و قابل لمس باشند و در عین حال نشان دهد کاهش بُعد چه اطلاعاتی را پنهان می‌کند.</p>
+          </details>
+        </div>
+
+        <h2 style="margin-top:32px">منابع علمی و پژوهشی</h2>
+        <ul class="xdoc__refs">
+          <li><i>[1]</i><span><span class="xdoc__en">Mikolov, T., Chen, K., Corrado, G., Dean, J.</span> — «Efficient Estimation of Word Representations in Vector Space» (Word2Vec)، ۲۰۱۳ — کشف جبر خطی واژگان در فضای برداری.</span></li>
+          <li><i>[2]</i><span><span class="xdoc__en">Vaswani, A.</span> و همکاران — «Attention Is All You Need»، <span class="xdoc__en">NeurIPS</span>، ۲۰۱۷ — معرفی معماری ترنسفورمر و مکانیسم Scaled Dot-Product Attention.</span></li>
+          <li><i>[3]</i><span><span class="xdoc__en">Ethayarajh, K.</span> — «How Contextual are Contextualized Word Representations?»، <span class="xdoc__en">EMNLP</span>، ۲۰۱۹ — بررسی حرکت بردار واژگان چندمعنایی در طول لایه‌های مدل.</span></li>
+          <li><i>[4]</i><span><span class="xdoc__en">Holtzman, A.</span> و همکاران — «The Curious Case of Neural Text Degeneration»، <span class="xdoc__en">ICLR</span>، ۲۰۲۰ — معرفی نمونه‌گیری هسته‌ای (<span class="xdoc__en">Nucleus Sampling / Top-P</span>).</span></li>
+          <li><i>[5]</i><span><span class="xdoc__en">Elhage, N., Olah, C.</span> و تیم <span class="xdoc__en">Anthropic</span> — «Toy Models of Superposition»، ۲۰۲۲ — فشرده‌سازی ویژگی‌های معنایی بیشتر از تعداد ابعاد فضا.</span></li>
+          <li><i>[6]</i><span><span class="xdoc__en">Park, K., Choe, Y. J., Veitch, V.</span> — «The Linear Representation Hypothesis and the Geometry of Large Language Models»، <span class="xdoc__en">ICML</span>، ۲۰۲۴.</span></li>
+          <li><i>[7]</i><span><span class="xdoc__en">Shannon, C. E.</span> — «A Mathematical Theory of Communication»، <span class="xdoc__en">Bell System Technical Journal</span>، ۱۹۴۸ — تعریف آنتروپی اطلاعات و عدم‌قطعیت.</span></li>
+        </ul>
+      </article>
+
+      <div class="xdoc__bridge">
+        <div class="xdoc__bridge-copy">
+          <h3>می‌خواهی همین هندسه را در مدل‌های واقعی ۲۰۲۶ امتحان کنی؟</h3>
+          <p>در استودیو نویدیکس می‌توانی بدون تحریم با جدیدترین مدل‌های زبانی جهان از جمله <strong>Claude Fable 5.2</strong>، <strong>GPT-6.2 Astra</strong>، <strong>Gemini 4 Neon</strong> و <strong>DeepSeek V4.1</strong> کار کنی و اثر پرامپت دقیق، بافت جمله و تفکر مرحله‌به‌مرحله را در عمل ببینی.</p>
+        </div>
+        <a class="xbtn xbtn--go" href="https://navidixstudio.com/studio.html">
+          <span>ورود به استودیو چت و کد</span>
+          <svg class="xbtn__ind" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h14M12 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<nav class="xwrap" aria-label="تجربه‌های دیگر">
+  <div class="xnext">
+    <a href="https://navidixstudio.com/explore/inside-a-cpu/"><small>تجربه‌ی ۰۷ · بعدی</small><b>درون یک پردازنده‌ی ۳ نانومتری — کالبدشکافی اولترا ۹ و فیزیک گرما</b></a>
+    <a href="https://navidixstudio.com/explore/hidden-network/"><small>تجربه‌ی ۰۵</small><b>شبکه‌ی پنهان — چرا اینترنت مقاوم و شکننده است</b></a>
+  </div>
+</nav>
+
+</main>
+
+<footer class="xfoot">
+  <p><span aria-hidden="true">©</span> ۱۴۰۵ <b>استودیو نویدیکس</b> — ساخته‌ی <a href="https://navidixstudio.com/about.html"><b>محمد نویدی</b></a>. تمام حقوق محفوظ است.<br />بازنشر با ذکر منبع آزاد است، فروشش نه.</p>
+</footer>
+
+<script src="./sim/geometry-of-meaning.js"></script>
+<script>
+(function () {
+  function init() {
+    if (window.NVXGeometryLab) window.NVXGeometryLab.mount('#stage');
+    var toc = document.querySelectorAll('[data-xdoc-toc] a');
+    if (toc.length && 'IntersectionObserver' in window) {
+      var byId = {};
+      toc.forEach(function (a) { byId[a.getAttribute('href').slice(1)] = a; });
+      var io = new IntersectionObserver(function (es) {
+        es.forEach(function (en) {
+          if (en.isIntersecting && byId[en.target.id]) {
+            toc.forEach(function (a) { a.classList.remove('is-active'); });
+            byId[en.target.id].classList.add('is-active');
+          }
+        });
+      }, { rootMargin: '-20% 0px -65% 0px' });
+      Object.keys(byId).forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el) io.observe(el);
+      });
+    }
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+})();
+</script>
+</body>
+</html>
